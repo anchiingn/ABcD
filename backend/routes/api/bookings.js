@@ -90,6 +90,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
     const allBookings = await Booking.findAll({
         where: {
             spotId: booking.spotId,
+            id: { [Op.ne]: booking.id }
         },
     });
 
@@ -135,14 +136,12 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
 
         return res.json(editBooking);
     }
-
-
 });
 
 //Delete a Booking x
 router.delete('/:bookingId', requireAuth, async (req, res) => {
     const booking = await Booking.findByPk(req.params.bookingId);
-    
+
     if (!booking) res.status(404).json({ "message": "Booking couldn't be found" });
 
     const start = new Date(booking.startDate);
