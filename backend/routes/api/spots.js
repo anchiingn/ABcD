@@ -33,6 +33,9 @@ router.get('/', async (req, res) => {
 
     if (page || size || minLat || maxLat || minLng || maxLng || minPrice || maxPrice || type || city || state || country) {
 
+        if (!page) page = parseInt(page) || 1;
+        if (!size) size = parseInt(page) || 20;
+
         let pagination = {};
         if (size >= 1 && page >= 1 && size <= 20 && page <= 10) {
             pagination.limit = size;
@@ -160,7 +163,7 @@ router.get('/', async (req, res) => {
             }
         });
 
-        res.json({ Spots: allSpots, page: page, size: size });
+        res.json({ Spots: allSpots, page: parseInt(page), size: parseInt(size) });
     } else {
         const spots = await Spot.findAll({
             include: [{ model: Review }, { model: SpotImage }]
@@ -298,7 +301,6 @@ router.get('/:spotId', async (req, res) => {
     reviews.forEach(review => {
         review.forEach(star => {
             reviewCount++
-            console.log(star.stars)
             rate += star.stars / review.length
         });
     });
