@@ -42,6 +42,7 @@ router.post(
             // err.status = 401;
             // err.title = 'Login failed';
             // err.errors = { credential: 'The provided credentials were invalid.' };
+            res.status(401)
             return next(res.json({
                 "message": "Invalid credentials"
               }));

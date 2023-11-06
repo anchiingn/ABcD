@@ -29,6 +29,7 @@ const handleValidationErrors = (req, _res, next) => {
             .array()
             .forEach(error => errors[error.path] = error.msg);
 
+        _res.status(400);
         next(_res.json({ message: "Bad Request", errors: errors }));
     }
     next();
