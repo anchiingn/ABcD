@@ -18,30 +18,31 @@ function Navigation({ isLoaded }) {
     );
   } else {
     sessionLinks = (
-        <>
-      <li>
+      <>
+
         <OpenModalButton
           buttonText="Log In"
           modalComponent={<LoginFormModal />}
         />
-      </li>
-      <li>
+
         <OpenModalButton
           buttonText="Sign Up"
           modalComponent={<SignupFormModal />}
         />
-      </li>
-        </>
+
+      </>
     );
   }
 
   return (
-    <ul>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
-      {isLoaded && sessionLinks}
-    </ul>
+    <div id='nav'>
+      <div id='nav_logo'>
+        <NavLink id='logo_name' to="/">ABcD</NavLink>
+      </div>
+      <div id='nav_button'>
+        {isLoaded && sessionLinks}
+      </div>
+    </div>
   );
 }
 

@@ -1,0 +1,15 @@
+#items {
+    width: 15em;
+}
+
+#img {
+    width: 15em;
+    height: 16em;
+    background-color: yellow;
+}
+
+#item_texts {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1em;
+}
