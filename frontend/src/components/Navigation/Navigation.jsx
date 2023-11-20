@@ -1,47 +1,29 @@
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import OpenModalButton from '../OpenModalButton/OpenModalButton';
-import LoginFormModal from '../LoginFormModal/LoginFormModal';
-import SignupFormModal from '../SignupFormModal/SignupFormModal';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
-  const sessionUser = useSelector((state) => state.session.user);
-
-  let sessionLinks;
-  if (sessionUser) {
-    sessionLinks = (
-      <li>
-        <ProfileButton user={sessionUser} />
-      </li>
-    );
-  } else {
-    sessionLinks = (
-      <>
-
-        <OpenModalButton
-          buttonText="Log In"
-          modalComponent={<LoginFormModal />}
-        />
-
-        <OpenModalButton
-          buttonText="Sign Up"
-          modalComponent={<SignupFormModal />}
-        />
-
-      </>
-    );
-  }
+  const sessionUser = useSelector(state => state.session.user);
 
   return (
     <div id='nav'>
-      <div id='nav_logo'>
-        <NavLink id='logo_name' to="/">ABcD</NavLink>
+      <div>
+        <i id='logo_icon' className="fa-brands fa-airbnb"></i>
+        <NavLink id='logo_name' exact to="/">ABnC</NavLink>
       </div>
-      <div id='nav_button'>
-        {isLoaded && sessionLinks}
-      </div>
+      {isLoaded && (
+        <div id='user_button'>
+          {sessionUser && ( //if there is user then create new spot
+            <h3 id='create_new_spot'>
+              <NavLink to={'/spots/new'}>Create a New Spot</NavLink>
+            </h3>
+          )}
+        <div>
+          <ProfileButton user={sessionUser} />
+        </div>
+        </div>
+      )}
     </div>
   );
 }

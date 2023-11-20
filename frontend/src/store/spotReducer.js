@@ -21,7 +21,6 @@ export const thunkFetchSpots = () => async (dispatch) => {
 export const thunkFetchSpotDetails = (spotId) => async (dispatch) => {
     const res = await fetch(`/api/spots/${spotId}`)
     const spots = await res.json();
-    console.log(spots)
     dispatch(getSpot(spots));
 }
 
