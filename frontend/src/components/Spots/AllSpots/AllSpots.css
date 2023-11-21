@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#spotList {
+    display: flex;
+    justify-content: center;
+    /* background-color: antiquewhite; */
+}
+
+#spotItems {
+    margin: 2.5em;
+    /* background-color: aqua; */
+}

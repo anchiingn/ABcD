@@ -13,17 +13,17 @@ module.exports = {
     await SpotImage.bulkCreate([
       {
         spotId: 1,
-        url: "link1",
+        url: "https://www.home-designing.com/wp-content/uploads/2023/03/blue-rug.jpg",
         preview: true
       },
       {
         spotId: 2,
-        url: "link2",
-        preview: false
+        url: "https://www.home-designing.com/wp-content/uploads/2023/08/tropical-house.jpg",
+        preview: true
       },
       {
         spotId: 3,
-        url: "link3",
+        url: "https://www.home-designing.com/wp-content/uploads/2023/04/brutalist-vibes.jpg",
         preview: true
       }
     ], { validate: true });

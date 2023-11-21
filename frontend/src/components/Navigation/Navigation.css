@@ -1,0 +1,33 @@
+#nav {
+    display: flex;
+    justify-content: space-between;
+    margin: 1em;
+    align-items: center;
+}
+
+ul>li:first-child {
+    display: flex;
+    justify-content: center;
+}
+
+#logo_name {
+    text-decoration: none;
+    color: orangered;
+    font-weight: bold;
+}
+
+#logo_icon {
+    color: orangered;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+#user_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#create_new_spot {
+    margin-right: 1em;
+}
