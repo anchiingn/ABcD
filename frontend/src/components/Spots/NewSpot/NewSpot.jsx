@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { thunkFetchNewSpot } from '../../../store/spotReducer';
+import { useDispatch } from 'react-redux';
+import { thunkFetchNewSpot, thunkFetchImg } from '../../../store/spotReducer';
 import { useNavigate } from 'react-router-dom';
 import './NewSPot.css';
 
-export default function NewSpot() {
+export default function NewSpot({ formTitle }) {
     const [country, setCountry] = useState('');
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
@@ -14,7 +14,7 @@ export default function NewSpot() {
     const [description, setDescription] = useState('');
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
-    const [url, setUrl] = useState('');
+    const [preview, setPreview] = useState('');
     const [image1, setImage1] = useState('');
     const [image2, setImage2] = useState('');
     const [image3, setImage3] = useState('');
@@ -24,6 +24,7 @@ export default function NewSpot() {
 
     const dispatch = useDispatch();
     const navigation = useNavigate()
+    let imgs;
 
     useEffect(() => {
         const error = {};
@@ -55,14 +56,20 @@ export default function NewSpot() {
             if (!price) {
                 error.price = "Price is required";
             }
-            if (!url) {
-                error.url = "URL is required";
+            if (!preview) {
+                error.preview = "Preview is required";
             }
+            imgs = [image1, image2, image3, image4];
+            imgs.forEach(img => {
+                if (!img.endsWith('.jpg') || !img.endsWith('.png') || !img.endsWith('.jpeg')) {
+                    error.imgs = "Image URL must end in .png, .jpg, or .jpeg"
+                }
+            })
         }
 
         setValidation(error)
 
-    }, [country, address, city, state, latitude, longtitude, description, name, price, url, submit])
+    }, [country, address, city, state, latitude, longtitude, description, name, price, preview, submit])
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -78,12 +85,29 @@ export default function NewSpot() {
             lng: parseFloat(longtitude),
             description,
             name,
-            price: parseFloat(price),
-            url
+            price: parseFloat(price)
         }
 
-        const spot = await dispatch(thunkFetchNewSpot(newSpot))
-        console.log(spot)
+        const newImage = {
+            preview,
+            image1,
+            image2,
+            image3,
+            image4
+        }
+        const spot = await dispatch(thunkFetchNewSpot(newSpot));
+
+        const validImageUrls = Object.values(newImage).filter(url => url.trim() !== ''); //cannot be empty
+
+        let imgObj;
+        validImageUrls.forEach(img => {
+            imgObj = { spotId: spot.id, url: img, preview: true }
+
+        })
+
+        await dispatch(thunkFetchImg(spot.id, imgObj));
+
+
         navigation(`./spots/${spot.id}`)
 
     }
@@ -94,7 +118,7 @@ export default function NewSpot() {
                 <div>
                     <div id='form_texts'>
                         <h1>Create a new Spot</h1>
-                        <h3>Where's your place located?</h3>
+                        <h3>Where&apos;s your place located?</h3>
                         <h4>Guests will only get your exact address once they booked a reservation.</h4>
                     </div>
                     <form id='new_spot_form' className='form' onSubmit={onSubmit}>
@@ -164,7 +188,7 @@ export default function NewSpot() {
                         <span className='errors'>{validation.description && `* ${validation.description}`}</span>
 
                         <h4>Create a title for your spot</h4>
-                        <p>Catch guest' attention with a spot title that highlights what makes <br />
+                        <p>Catch guest&apos; attention with a spot title that highlights what makes <br />
                             your place specials</p>
                         <input
                             type="text"
@@ -194,37 +218,45 @@ export default function NewSpot() {
                         <input
                             type="text"
                             placeholder='Preview image URL'
-                            value={url}
-                            onChange={e => setUrl(e.target.value)}
+                            value={preview}
+                            onChange={e => setPreview(e.target.value)}
                         />
+                        <span className='errors'>{validation.preview && `* ${validation.preview}`}</span>
+
                         <input
                             type="text"
                             placeholder='Image URL'
                             value={image1}
                             onChange={e => setImage1(e.target.value)}
                         />
+                        <span className='errors'>{validation.imgs && `* ${validation.imgs}`}</span>
+
                         <input
                             type="text"
                             placeholder='Image URL'
                             value={image2}
                             onChange={e => setImage2(e.target.value)}
                         />
+                        <span className='errors'>{validation.imgs && `* ${validation.imgs}`}</span>
+
                         <input
                             type="text"
                             placeholder='Image URL'
                             value={image3}
                             onChange={e => setImage3(e.target.value)}
                         />
+                        <span className='errors'>{validation.imgs && `* ${validation.imgs}`}</span>
+
                         <input
                             type="text"
                             placeholder='Image URL'
                             value={image4}
                             onChange={e => setImage4(e.target.value)}
                         />
-
+                        <span className='errors'>{validation.imgs && `* ${validation.imgs}`}</span>
 
                         <div id='button'>
-                            <button>Create a Spot</button>
+                            <button disabled={Object.keys(validation).length > 0}>Create a Spot</button>
                         </div>
 
 
