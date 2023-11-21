@@ -1,9 +1,236 @@
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { thunkFetchNewSpot } from '../../../store/spotReducer';
+import { useNavigate } from 'react-router-dom';
 import './NewSPot.css';
 
-export default function NewSpot () {
+export default function NewSpot() {
+    const [country, setCountry] = useState('');
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [latitude, setLatitude] = useState('');
+    const [longtitude, setLongtitude] = useState('');
+    const [description, setDescription] = useState('');
+    const [name, setName] = useState('');
+    const [price, setPrice] = useState('');
+    const [url, setUrl] = useState('');
+    const [image1, setImage1] = useState('');
+    const [image2, setImage2] = useState('');
+    const [image3, setImage3] = useState('');
+    const [image4, setImage4] = useState('');
+    const [validation, setValidation] = useState({});
+    const [submit, setSubmit] = useState(false)
+
+    const dispatch = useDispatch();
+    const navigation = useNavigate()
+
+    useEffect(() => {
+        const error = {};
+        if (submit) {
+            if (!country) {
+                error.country = "Country is required";
+            }
+            if (!address) {
+                error.address = "Address is required";
+            }
+            if (!city) {
+                error.city = "City is required";
+            }
+            if (!state) {
+                error.state = "State is required";
+            }
+            if (!latitude) {
+                error.latitude = "Latitude is required";
+            }
+            if (!longtitude) {
+                error.longtitude = "Longtitude is required";
+            }
+            if (!description) {
+                error.description = "Description needs a minimum of 30 characters";
+            }
+            if (!name) {
+                error.name = "Title is required";
+            }
+            if (!price) {
+                error.price = "Price is required";
+            }
+            if (!url) {
+                error.url = "URL is required";
+            }
+        }
+
+        setValidation(error)
+
+    }, [country, address, city, state, latitude, longtitude, description, name, price, url, submit])
+
+    const onSubmit = async (e) => {
+        e.preventDefault()
+        setSubmit(true)
+
+
+        const newSpot = {
+            country,
+            address,
+            city,
+            state,
+            lat: parseFloat(latitude),
+            lng: parseFloat(longtitude),
+            description,
+            name,
+            price: parseFloat(price),
+            url
+        }
+
+        const spot = await dispatch(thunkFetchNewSpot(newSpot))
+        console.log(spot)
+        navigation(`./spots/${spot.id}`)
+
+    }
+
     return (
         <>
-            <h1>hi</h1>
+            <div id='form_container'>
+                <div>
+                    <div id='form_texts'>
+                        <h1>Create a new Spot</h1>
+                        <h3>Where's your place located?</h3>
+                        <h4>Guests will only get your exact address once they booked a reservation.</h4>
+                    </div>
+                    <form id='new_spot_form' className='form' onSubmit={onSubmit}>
+                        <label> Country</label>
+                        <input
+                            type="text"
+                            placeholder='Country'
+                            value={country}
+                            onChange={(e) => setCountry(e.target.value)}
+                        />
+                        <span className='errors'>{validation.country && `* ${validation.country}`}</span>
+
+                        <label> Street Address</label>
+                        <input
+                            type="text"
+                            placeholder='Adress'
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                        />
+                        <span className='errors'>{validation.address && `* ${validation.address}`}</span>
+
+                        <label> City</label>
+                        <input
+                            type="text"
+                            placeholder='City'
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
+                        />
+                        <span className='errors'>{validation.city && `* ${validation.city}`}</span>
+
+                        <label> State</label>
+                        <input
+                            type="text"
+                            placeholder='State'
+                            value={state}
+                            onChange={e => setState(e.target.value)}
+                        />
+                        <span className='errors'>{validation.state && `* ${validation.state}`}</span>
+
+                        <label> Latitude</label>
+                        <input
+                            type="text"
+                            placeholder='Latitude'
+                            value={latitude}
+                            onChange={e => setLatitude(e.target.value)}
+                        />
+                        <span className='errors'>{validation.latitude && `* ${validation.latitude}`}</span>
+
+                        <label> Longtitude</label>
+                        <input
+                            type="text"
+                            placeholder='Longtitude'
+                            value={longtitude}
+                            onChange={e => setLongtitude(e.target.value)}
+                        />
+                        <span className='errors'>{validation.longtitude && `* ${validation.longtitude}`}</span>
+
+
+                        <h4>Describe your place to guests</h4>
+                        <p>Mention the best features of your space, any special amentities like <br />
+                            fast wifi or parking, and what you love about the neighborhood.</p>
+                        <textarea
+                            placeholder='Please write at least 30 characters'
+                            value={description}
+                            onChange={e => setDescription(e.target.value)}
+                        />
+                        <span className='errors'>{validation.description && `* ${validation.description}`}</span>
+
+                        <h4>Create a title for your spot</h4>
+                        <p>Catch guest' attention with a spot title that highlights what makes <br />
+                            your place specials</p>
+                        <input
+                            type="text"
+                            placeholder='Name of your spot'
+                            value={name}
+                            onChange={e => setName(e.target.value)}
+                        />
+                        <span className='errors'>{validation.name && `* ${validation.name}`}</span>
+
+                        <h4>Set a base price for your spot</h4>
+                        <p>Competitive pricing can help your listing stand out and rank higher <br />
+                            in search results.</p>
+                        <div>
+                            $
+                            <input
+                                type="text"
+                                placeholder='Price per night (USD)'
+                                value={price}
+                                onChange={e => setPrice(e.target.value)}
+                            />
+                        </div>
+                        <span className='errors'>{validation.price && `* ${validation.price}`}</span>
+
+
+                        <h4>Liven up your spot with photos</h4>
+                        <p>Submit a link to at least one photo to publish your spot</p>
+                        <input
+                            type="text"
+                            placeholder='Preview image URL'
+                            value={url}
+                            onChange={e => setUrl(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder='Image URL'
+                            value={image1}
+                            onChange={e => setImage1(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder='Image URL'
+                            value={image2}
+                            onChange={e => setImage2(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder='Image URL'
+                            value={image3}
+                            onChange={e => setImage3(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder='Image URL'
+                            value={image4}
+                            onChange={e => setImage4(e.target.value)}
+                        />
+
+
+                        <div id='button'>
+                            <button>Create a Spot</button>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
         </>
     )
 }

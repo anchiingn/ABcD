@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { thunkFetchSpotDetails } from "../../../store/spotReducer";
 import { thunkFetchReviews } from "../../../store/reviewReducer";
@@ -10,7 +10,7 @@ export default function SpotDetails () {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const spot = useSelector(state => state.spots.Spots || null);
-    const review = useSelector(state => console.log(state))
+    const reviews = useSelector(state => state.review.Review || null)
     
     useEffect(() => {
         dispatch(thunkFetchSpotDetails(spotId));
@@ -21,6 +21,7 @@ export default function SpotDetails () {
     }, [dispatch, spotId])
 
     if (!spot) return null;
+    if (!reviews) return null;
 
     return (
         <>
@@ -48,7 +49,11 @@ export default function SpotDetails () {
                     <i className="fa-solid fa-star"></i>    
                     {spot.avgRating} - {spot.numReviews} reviews
                 </h1>
-                <div> <ReviewList /> </div>
+                {reviews.map(review => {
+                    return <div key={review.id}>
+                            <ReviewList review={review} />
+                           </div>
+                })}
             </div>
         </>
     )

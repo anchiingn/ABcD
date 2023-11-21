@@ -1,10 +1,10 @@
 import './ReviewList.css';
 
-export default function ReviewList () {
-   
+export default function ReviewList ({ review }) {
+   console.log(review)
     return (
         <>
-            <h1>hi</h1>
+            <h1>{review.review}</h1>
         </>
     )
 }
