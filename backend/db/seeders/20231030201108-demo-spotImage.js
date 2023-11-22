@@ -17,15 +17,76 @@ module.exports = {
         preview: true
       },
       {
+        spotId: 1,
+        url: "https://www.home-designing.com/wp-content/uploads/2023/03/blue-rug.jpg",
+        preview: false
+      },
+      {
+        spotId: 1,
+        url: "https://www.home-designing.com/wp-content/uploads/2023/03/blue-rug.jpg",
+        preview: false
+      },
+      {
+        spotId: 1,
+        url: "https://www.home-designing.com/wp-content/uploads/2023/03/blue-rug.jpg",
+        preview: false
+      },
+      {
+        spotId: 1,
+        url: "https://www.home-designing.com/wp-content/uploads/2023/03/blue-rug.jpg",
+        preview: false
+      },
+      {
         spotId: 2,
         url: "https://www.home-designing.com/wp-content/uploads/2023/08/tropical-house.jpg",
         preview: true
       },
       {
+        spotId: 2,
+        url: "https://www.home-designing.com/wp-content/uploads/2023/08/tropical-house.jpg",
+        preview: false
+      },
+      {
+        spotId: 2,
+        url: "https://www.home-designing.com/wp-content/uploads/2023/08/tropical-house.jpg",
+        preview: false
+      },
+      {
+        spotId: 2,
+        url: "https://www.home-designing.com/wp-content/uploads/2023/08/tropical-house.jpg",
+        preview: false
+      },
+      {
+        spotId: 2,
+        url: "https://www.home-designing.com/wp-content/uploads/2023/08/tropical-house.jpg",
+        preview: false
+      },
+      {
         spotId: 3,
         url: "https://www.home-designing.com/wp-content/uploads/2023/04/brutalist-vibes.jpg",
         preview: true
+      },
+      {
+        spotId: 3,
+        url: "https://www.home-designing.com/wp-content/uploads/2023/04/brutalist-vibes.jpg",
+        preview: false
+      },
+      {
+        spotId: 3,
+        url: "https://www.home-designing.com/wp-content/uploads/2023/04/brutalist-vibes.jpg",
+        preview: false
+      },
+      {
+        spotId: 3,
+        url: "https://www.home-designing.com/wp-content/uploads/2023/04/brutalist-vibes.jpg",
+        preview: false
+      },
+      {
+        spotId: 3,
+        url: "https://www.home-designing.com/wp-content/uploads/2023/04/brutalist-vibes.jpg",
+        preview: false
       }
+      
     ], { validate: true });
   },
 

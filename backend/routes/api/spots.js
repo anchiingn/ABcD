@@ -179,8 +179,16 @@ router.get('/', async (req, res) => {
             });
             const images = [];
             images.push(spots.SpotImages);
+            let preview;
+            const previewUrl = []
             images.forEach(image => {
-                image.forEach(url => {
+                image.forEach(im => {
+                    if (im.preview === true) {
+                        preview = im
+                        previewUrl.push(preview)
+                    }
+                })
+                previewUrl.forEach(url => {
                     imageUrl += url.url
                 })
             });
@@ -242,13 +250,20 @@ router.get('/current', requireAuth, async (req, res) => {
         });
 
         const images = [];
-        images.push(spots.SpotImages);
-        images.forEach(image => {
-            image.forEach(url => {
-                // console.log(star.stars)
-                imageUrl += url.url
-            })
-        });
+            images.push(spots.SpotImages);
+            let preview;
+            const previewUrl = []
+            images.forEach(image => {
+                image.forEach(im => {
+                    if (im.preview === true) {
+                        preview = im
+                        previewUrl.push(preview)
+                    }
+                })
+                previewUrl.forEach(url => {
+                    imageUrl += url.url
+                })
+            });
 
         return {
             id: spots.id,
