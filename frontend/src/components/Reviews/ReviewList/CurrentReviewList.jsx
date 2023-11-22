@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
-import './ReviewList.css';
-import OpenModalButton from '../OpenModalButton/OpenModalButton';
-import DeleteReview from './DeleteReview/DeleteReview';
+import OpenModalButton from '../../OpenModalButton/OpenModalButton';
+import DeleteReview from '../DeleteReview/DeleteReview';
 
-export default function ReviewList({ review, spot }) {
+export default function CurrentReviewList({ review, spots }) {
+    console.log(spots)
     const sessionUser = useSelector((state) => state.session.user);
 
     const date = new Date (review.createdAt);
@@ -13,7 +13,9 @@ export default function ReviewList({ review, spot }) {
     if (!review || !review.User) return null
     return (
         <>
-            <div>{review.User.firstName}</div>
+            {spots.map(spot => {
+                return <div key={spot.id}>{spot.name}</div>
+            })}
             <div>{month} {year}</div>
             <div>{review.review}</div>
             {sessionUser.id === review.userId && (

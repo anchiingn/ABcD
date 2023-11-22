@@ -5,7 +5,7 @@ import { thunkFetchSpotDetails } from "../../../store/spotReducer";
 import { thunkFetchReviews } from "../../../store/reviewReducer";
 import './SpotDetails.css'
 import ReviewList from "../../Reviews/ReviewList";
-import AddReviewModal from "../../AddReviewModal/AddReviewModal";
+import AddReviewModal from "../../Reviews/AddReview/AddReview";
 import OpenModalButton from '../../OpenModalButton/OpenModalButton'
 
 export default function SpotDetails () {
@@ -18,11 +18,8 @@ export default function SpotDetails () {
     
     useEffect(() => {
         dispatch(thunkFetchSpotDetails(spotId));
-    }, [dispatch, spotId]);
-
-    useEffect(() => {
         dispatch(thunkFetchReviews(spotId))
-    }, [dispatch, spotId])
+    }, [dispatch, spotId]);
 
 
     if (!reviews || !spot || !spot.SpotImages || !spot?.ownerId || !sessionUser) return null;
@@ -52,11 +49,11 @@ export default function SpotDetails () {
                 </div>
             </div>
             <div id="review_container">
-                <h1>
+                <div>
                     <i className="fa-solid fa-star"></i>    
-                    {reviews.length === 0  ?'New' :`${spot.avgRating} - ${spot.numReviews} 'Review'`} 
-                </h1>
-                {sessionUser.id !== spot.ownerId &&(
+                    {reviews.length === 0  ?'New' :`${spot.avgRating} - ${spot.numReviews} Review`} 
+                </div>
+                {sessionUser && sessionUser.id !== spot.ownerId &&(
                     <OpenModalButton 
                         buttonText= 'Post your Review'
                         modalComponent={<AddReviewModal spot={spot}/>}
@@ -64,7 +61,7 @@ export default function SpotDetails () {
                 )}
                 {reviews.map(review => {
                     return <div key={review.id}>
-                            <ReviewList review={review} />
+                            <ReviewList review={review} spot={spot}/>
                            </div>
                 })}
             </div>

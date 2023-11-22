@@ -1,8 +1,12 @@
 import './SpotItem.css';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import OpenModalButton from '../../OpenModalButton/OpenModalButton';
+import DeleteSpot from '../DeleteSpot/DeleteSpot';
 
-export default function SpotItem ({ spot }) {
-    // console.log(spot)
+export default function SpotItem({ spot }) {
+    const sessionUser = useSelector((state) => state.session.user);
+
     return (
         <div id='items'>
             <NavLink to={`spots/${spot.id}`}>

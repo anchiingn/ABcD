@@ -6,6 +6,9 @@ import * as sessionActions from './store/session';
 import AllSpots from './components/Spots/AllSpots/AllSpots';
 import SpotDetails from './components/Spots/SpotDetails/SpotDetails';
 import NewSpot from './components/Spots/NewSpot/NewSpot';
+import CurrentSpot from './components/Spots/CurrentSpot/CurrentSpot';
+import UpdateSpot from './components/Spots/UpdateSpot/UpdateSpot';
+import CurrentReview from './components/Reviews/CurrentReview/CurrentReview';
 
 
 function Layout() {
@@ -41,6 +44,18 @@ const router = createBrowserRouter([
       {
         path: '/spots/new',
         element: <NewSpot />
+      },
+      {
+        path: '/spots/current',
+        element: <CurrentSpot />
+      },
+      {
+        path: '/spots/update/:spotId',
+        element: <UpdateSpot />
+      },
+      {
+        path: '/reviews/current',
+        element: <CurrentReview />
       },
       {
         path: '*',
