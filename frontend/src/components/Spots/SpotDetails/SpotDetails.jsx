@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { thunkFetchSpotDetails } from "../../../store/spotReducer";
 import { thunkFetchReviews } from "../../../store/reviewReducer";
 import './SpotDetails.css'
-import ReviewList from "../../Reviews/ReviewList";
+import ReviewList from "../../Reviews/ReviewList/ReviewList";
 import AddReviewModal from "../../Reviews/AddReview/AddReview";
 import OpenModalButton from '../../OpenModalButton/OpenModalButton'
 
@@ -22,19 +22,35 @@ export default function SpotDetails() {
     }, [dispatch, spotId]);
 
 
-    if (!reviews || !spot || !spot.SpotImages || !spot?.ownerId ) return null;
+    if (!reviews || !spot || !spot.SpotImages || !spot?.ownerId) return null;
+
+    const alertButt = () => {
+        return alert('Feture Coming Soon...')
+    }
 
     return (
         <>
             <div id="spot_contianer">
                 <h2>{spot.name}</h2>
                 <h3>{spot.city}, {spot.state}, {spot.country}</h3>
-                <div>
-                    <img src={spot.SpotImages[0].url} alt="preview" />
-                    <div>
-                        {spot.SpotImages && spot.SpotImages.slice(1).map((image) => (
-                            <img key={image.id} src={image.url} alt="imgs" />
-                        ))}
+                <div id="imgs">
+                    <div id="left_img">
+                        {spot.SpotImages.map(img => {
+                            if (img.preview === true) {
+                                return <img id="preview_img" key={img.id} src={img.url} alt="preview" />
+                            }
+                        })}
+                    </div>
+                    <div id="right_imgs">
+                        {spot.SpotImages.map(img => {
+                            if (img.preview === false) {
+                                return (
+                                    <div id="side_imgs">
+                                        <img key={img.id} src={img.url} alt="imgs" />
+                                    </div>
+                                )
+                            }
+                        })}
                     </div>
                 </div>
                 <div id="left_description">
@@ -49,7 +65,7 @@ export default function SpotDetails() {
                             {reviews.length === 0 ? 'New' : `${spot.avgRating} - ${spot.numReviews} 'Review'`}
                         </div>
                     </div>
-                    <button>Reserve</button>
+                    <button onClick={alertButt}>Reserve</button>
                 </div>
             </div>
             <div id="review_container">

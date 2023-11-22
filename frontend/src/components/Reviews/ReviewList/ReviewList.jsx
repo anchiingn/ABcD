@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import './ReviewList.css';
-import OpenModalButton from '../OpenModalButton/OpenModalButton';
-import DeleteReview from './DeleteReview/DeleteReview';
-import UpdateReview from './UpdateReview/UpdateReview';
+import OpenModalButton from '../../OpenModalButton/OpenModalButton';
+import DeleteReview from '../DeleteReview/DeleteReview';
+import UpdateReview from '../UpdateReview/UpdateReview';
 
 export default function ReviewList({ review, spots }) {
     const sessionUser = useSelector((state) => state.session.user);
@@ -17,7 +17,7 @@ export default function ReviewList({ review, spots }) {
             <div>{review.User.firstName}</div>
             <div>{month} {year}</div>
             <div>{review.review}</div>
-            {sessionUser.id === review.userId && (
+            {sessionUser && sessionUser.id === review.userId && (
                 <>
                     <OpenModalButton
                         buttonText={'Update'}

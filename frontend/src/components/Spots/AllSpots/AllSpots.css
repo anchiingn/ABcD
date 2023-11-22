@@ -6,10 +6,11 @@
 #spotList {
     display: flex;
     justify-content: center;
-    /* background-color: antiquewhite; */
+    flex-wrap: wrap;
+    margin: 0 10px;
 }
 
 #spotItems {
-    margin: 2.5em;
-    /* background-color: aqua; */
+    margin: 1.5em;
 }
+

@@ -1,3 +1,30 @@
+#imgs {
+    display: flex;
+    justify-content: center;
+}
+
+#preview_img {
+    width: 45em;
+    height: 30em;
+    object-fit: cover;
+}
+
+#right_imgs {
+    background-color: aqua;
+    width: 38em;
+    margin-left: 25px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#side_imgs  img{
+    width: 18em;
+    height: 12em;
+}
+
+
 #review_container {
     border-top: 2px solid black;
 }
+

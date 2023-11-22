@@ -89,23 +89,6 @@ export default function NewSpot() {
         }
 
         const spot = await dispatch(thunkFetchNewSpot(newSpot));
-        // const newImage = {
-        //     preview,
-        //     image1,
-        //     image2,
-        //     image3,
-        //     image4
-        // }
-
-        // const validImageUrls = Object.values(newImage).filter(url => url.trim() !== ''); //cannot be empty
-
-        // let imgObj;
-        // validImageUrls.forEach(img => {
-        //     imgObj = { spotId: spot.id, url: img, preview: true }
-
-        // })
-
-        // await dispatch(thunkFetchImg(spot.id, imgObj));
 
         if (preview !== '') {
             const imageObj = { spotId: spot.id, url: preview, preview: true }

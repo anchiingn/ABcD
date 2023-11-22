@@ -16,7 +16,7 @@ function Navigation({ isLoaded }) {
         <div id='user_button'>
           {sessionUser && ( //if there is user then create new spot
             <h3 id='create_new_spot'>
-              <NavLink to={'/spots/new'}>Create a New Spot</NavLink>
+              <NavLink to={'/spots/new'}  style={{textDecoration: 'none', color: 'orangered'}}>Create a New Spot</NavLink>
             </h3>
           )}
         <div>
