@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { thunkFetchNewSpot, thunkFetchImg } from '../../../store/spotReducer';
+import { thunkFetchUpdateSpot, thunkFetchImg} from '../../../store/spotReducer';
 import { useNavigate } from 'react-router-dom';
-import './NewSPot.css';
+import { useParams } from 'react-router-dom';
 
-export default function NewSpot() {
+export default function UpdateSpot() {
     const [country, setCountry] = useState('');
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
@@ -22,10 +22,12 @@ export default function NewSpot() {
     const [validation, setValidation] = useState({});
     const [submit, setSubmit] = useState(false)
 
+    const { spotId } = useParams();
+
     const dispatch = useDispatch();
     const navigation = useNavigate()
-
     let imgs;
+
     useEffect(() => {
         const error = {};
         if (submit) {
@@ -56,12 +58,12 @@ export default function NewSpot() {
             if (!price) {
                 error.price = "Price is required";
             }
-            if (!preview) {
-                error.preview = "Preview is required";
-            }
+            // if (!preview && preview.trim() !== '') {
+            //     error.preview = "Preview is required";
+            // }
             imgs = [image1, image2, image3, image4];
             imgs.forEach(img => {
-                if (!img.endsWith('.jpg') || !img.endsWith('.png') || !img.endsWith('.jpeg')) {
+                if (img.trim() !== '' && (!img.endsWith('.jpg') || !img.endsWith('.png') || !img.endsWith('.jpeg'))) {
                     error.imgs = "Image URL must end in .png, .jpg, or .jpeg"
                 }
             })
@@ -88,7 +90,24 @@ export default function NewSpot() {
             price: parseFloat(price)
         }
 
-        const spot = await dispatch(thunkFetchNewSpot(newSpot));
+        const spot = await dispatch(thunkFetchUpdateSpot(newSpot));
+        // const newImage = {
+        //     preview,
+        //     image1,
+        //     image2,
+        //     image3,
+        //     image4
+        // }
+
+        // const validImageUrls = Object.values(newImage).filter(url => url.trim() !== ''); //cannot be empty
+
+        // let imgObj;
+        // validImageUrls.forEach(img => {
+        //     imgObj = { spotId: spot.id, url: img, preview: true }
+
+        // })
+
+        // await dispatch(thunkFetchImg(spot.id, imgObj));
 
         if (preview !== '') {
             const imageObj = { spotId: spot.id, url: preview, preview: true }
@@ -115,9 +134,7 @@ export default function NewSpot() {
             await dispatch(thunkFetchImg(spot.id,imageObj))
         }
 
-
         navigation(`./spots/${spot.id}`)
-
     }
 
     return (
@@ -125,7 +142,7 @@ export default function NewSpot() {
             <div id='form_container'>
                 <div>
                     <div id='form_texts'>
-                        <h1>Create a new Spot</h1>
+                        <h1>Update your Spot</h1>
                         <h3>Where&apos;s your place located?</h3>
                         <h4>Guests will only get your exact address once they booked a reservation.</h4>
                     </div>

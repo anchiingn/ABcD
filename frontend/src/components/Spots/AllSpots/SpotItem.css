@@ -1,19 +1,23 @@
 #items {
-    width: 15em;
+    width: 18em;
 }
 
 #img_container {
-    width: 290px; 
-    height: 220px;
+    width: 18em; 
+    height: 23em;
 }
 
 #img_container img {
+    border-radius: 15px;
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 
 #item_texts {
     display: flex;
     justify-content: space-between;
     margin-top: 1em;
+    text-decoration: none;
 }
+
