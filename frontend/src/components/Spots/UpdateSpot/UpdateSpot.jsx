@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { thunkFetchUpdateSpot, thunkFetchImg} from '../../../store/spotReducer';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 export default function UpdateSpot() {
     const [country, setCountry] = useState('');
@@ -20,6 +21,8 @@ export default function UpdateSpot() {
     const [image4, setImage4] = useState('');
     const [validation, setValidation] = useState({});
     const [submit, setSubmit] = useState(false)
+
+    const { spotId } = useParams();
 
     const dispatch = useDispatch();
     const navigation = useNavigate()
@@ -55,15 +58,15 @@ export default function UpdateSpot() {
             if (!price) {
                 error.price = "Price is required";
             }
-            // if (!preview) {
+            // if (!preview && preview.trim() !== '') {
             //     error.preview = "Preview is required";
             // }
-            // imgs = [image1, image2, image3, image4];
-            // imgs.forEach(img => {
-            //     if (!img.endsWith('.jpg') || !img.endsWith('.png') || !img.endsWith('.jpeg')) {
-            //         error.imgs = "Image URL must end in .png, .jpg, or .jpeg"
-            //     }
-            // })
+            imgs = [image1, image2, image3, image4];
+            imgs.forEach(img => {
+                if (img.trim() !== '' && (!img.endsWith('.jpg') || !img.endsWith('.png') || !img.endsWith('.jpeg'))) {
+                    error.imgs = "Image URL must end in .png, .jpg, or .jpeg"
+                }
+            })
         }
 
         setValidation(error)
@@ -87,28 +90,51 @@ export default function UpdateSpot() {
             price: parseFloat(price)
         }
 
-        const newImage = {
-            preview,
-            image1,
-            image2,
-            image3,
-            image4
-        }
         const spot = await dispatch(thunkFetchUpdateSpot(newSpot));
+        // const newImage = {
+        //     preview,
+        //     image1,
+        //     image2,
+        //     image3,
+        //     image4
+        // }
 
-        const validImageUrls = Object.values(newImage).filter(url => url.trim() !== ''); //cannot be empty
+        // const validImageUrls = Object.values(newImage).filter(url => url.trim() !== ''); //cannot be empty
 
-        let imgObj;
-        validImageUrls.forEach(img => {
-            imgObj = { spotId: spot.id, url: img, preview: true }
+        // let imgObj;
+        // validImageUrls.forEach(img => {
+        //     imgObj = { spotId: spot.id, url: img, preview: true }
 
-        })
+        // })
 
-        await dispatch(thunkFetchImg(spot.id, imgObj));
+        // await dispatch(thunkFetchImg(spot.id, imgObj));
 
+        if (preview !== '') {
+            const imageObj = { spotId: spot.id, url: preview, preview: true }
+            await dispatch(thunkFetchImg(spot.id,imageObj))
+        }
+
+        if (image1 !== '') {
+            const imageObj = { spotId: spot.id, url: image1, preview: false }
+            await dispatch(thunkFetchImg(spot.id,imageObj))
+        }
+
+        if (image2 !== '') {
+            const imageObj = { spotId: spot.id, url: image2, preview: false }
+            await dispatch(thunkFetchImg(spot.id,imageObj))
+        }
+
+        if (image3 !== '') {
+            const imageObj = { spotId: spot.id, url: image3, preview: false }
+            await dispatch(thunkFetchImg(spot.id,imageObj))
+        }
+
+        if (image4 !== '') {
+            const imageObj = { spotId: spot.id, url: image4, preview: false }
+            await dispatch(thunkFetchImg(spot.id,imageObj))
+        }
 
         navigation(`./spots/${spot.id}`)
-
     }
 
     return (

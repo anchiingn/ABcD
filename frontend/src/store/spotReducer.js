@@ -82,15 +82,15 @@ export const thunkFetchImg = (spotId, img) => async (dispatch) => {
     }
 }
 
-export const thunkFetchUpdateSpot = (updatedSpot) => async (dispatch) => {
-    console.log(updateSpot)
-    const res = await csrfFetch(`/api/spots/${updatedSpot.id}`, {
+export const thunkFetchUpdateSpot = (spotId,updatedSpot) => async (dispatch) => {
+    const res = await csrfFetch(`/api/spots/${spotId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedSpot)
     });
     const spot = await res.json();
     dispatch(getSpot(spot));
+    return spot
 }
 
 export const thunkFetchRemoveSpot = (spotId) => async (dispatch) => {

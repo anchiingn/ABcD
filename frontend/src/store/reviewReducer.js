@@ -61,6 +61,7 @@ export const thunkFetchUpdateReview = (updatedReview) => async (dispatch) => {
     });
     const review = await res.json();
     dispatch(getSpot(review));
+    return review
 }
 
 export const thunkFetchRemoveReview = (reviewId) => async (dispatch) => {

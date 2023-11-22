@@ -28,7 +28,7 @@ export default function CurrentSpot() {
                     {spots.map(spot => (
                         <div>
                             <SpotItem key={spot.id} spot={spot} />
-                            <NavLink to={'/spots/update/:spotId'}>
+                            <NavLink to={`/spots/update/${spot.id}`}>
                                 <button>Update</button>
                             </NavLink>
                             <OpenModalButton

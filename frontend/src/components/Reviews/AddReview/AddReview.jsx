@@ -30,17 +30,21 @@ export default function AddReviewModal({ spot }) {
                     value={review}
                     onChange={e => setReview(e.target.value)}
                 />
-                <form >
-                    <fieldset>
-                        <input name={'star1'} type="radio" value={1} onChange={e => setStars(e.target.value)} />
-                        <input name={'star2'} type="radio" value={2} onChange={e => setStars(e.target.value)} />
-                        <input name={'star3'} type="radio" value={3} onChange={e => setStars(e.target.value)} />
-                        <input name={'star4'} type="radio" value={4} onChange={e => setStars(e.target.value)} />
-                        <input name={'star5'} type="radio" value={5} onChange={e => setStars(e.target.value)} />
-                    </fieldset>
+                <form onSubmit={onSubmit}>
+                    <div>
+                        {[1, 2, 3, 4, 5].map(star => (
+                            <input
+                                key={star.id}
+                                name={`star${star}`}
+                                type="radio"
+                                value={star}
+                                onChange={e => setStars(e.target.value)}
+                            />
+                        ))}
+                    </div>
+                    {stars ? (stars === '1' ? `${stars} Star` : `${stars} Stars`) : ''}
+                    <button type="submit">Submit Your Review</button>
                 </form>
-                {stars === 1 ? `${stars} Star` : `${stars} Stars`}
-                <button onClick={onSubmit}>Submit Your Review</button>
             </div>
 
         </>

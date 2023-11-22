@@ -24,7 +24,7 @@ export default function NewSpot() {
 
     const dispatch = useDispatch();
     const navigation = useNavigate()
-    
+
     let imgs;
     useEffect(() => {
         const error = {};
@@ -88,24 +88,49 @@ export default function NewSpot() {
             price: parseFloat(price)
         }
 
-        const newImage = {
-            preview,
-            image1,
-            image2,
-            image3,
-            image4
-        }
         const spot = await dispatch(thunkFetchNewSpot(newSpot));
+        // const newImage = {
+        //     preview,
+        //     image1,
+        //     image2,
+        //     image3,
+        //     image4
+        // }
 
-        const validImageUrls = Object.values(newImage).filter(url => url.trim() !== ''); //cannot be empty
+        // const validImageUrls = Object.values(newImage).filter(url => url.trim() !== ''); //cannot be empty
 
-        let imgObj;
-        validImageUrls.forEach(img => {
-            imgObj = { spotId: spot.id, url: img, preview: true }
+        // let imgObj;
+        // validImageUrls.forEach(img => {
+        //     imgObj = { spotId: spot.id, url: img, preview: true }
 
-        })
+        // })
 
-        await dispatch(thunkFetchImg(spot.id, imgObj));
+        // await dispatch(thunkFetchImg(spot.id, imgObj));
+
+        if (preview !== '') {
+            const imageObj = { spotId: spot.id, url: preview, preview: true }
+            await dispatch(thunkFetchImg(spot.id,imageObj))
+        }
+
+        if (image1 !== '') {
+            const imageObj = { spotId: spot.id, url: image1, preview: false }
+            await dispatch(thunkFetchImg(spot.id,imageObj))
+        }
+
+        if (image2 !== '') {
+            const imageObj = { spotId: spot.id, url: image2, preview: false }
+            await dispatch(thunkFetchImg(spot.id,imageObj))
+        }
+
+        if (image3 !== '') {
+            const imageObj = { spotId: spot.id, url: image3, preview: false }
+            await dispatch(thunkFetchImg(spot.id,imageObj))
+        }
+
+        if (image4 !== '') {
+            const imageObj = { spotId: spot.id, url: image4, preview: false }
+            await dispatch(thunkFetchImg(spot.id,imageObj))
+        }
 
 
         navigation(`./spots/${spot.id}`)
