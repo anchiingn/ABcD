@@ -90,7 +90,7 @@ export default function UpdateSpot() {
             price: parseFloat(price)
         }
 
-        const spot = await dispatch(thunkFetchUpdateSpot(newSpot));
+        const spot = await dispatch(thunkFetchUpdateSpot(spotId,newSpot));
         // const newImage = {
         //     preview,
         //     image1,

@@ -105,6 +105,7 @@ export const thunkFetchRemoveSpot = (spotId) => async (dispatch) => {
 
 //reducer
 const initialState = {};
+
 export const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_SPOTS:
@@ -117,11 +118,12 @@ export const spotsReducer = (state = initialState, action) => {
             return { ...state, [action.spot.id]: action.spot };
         case ADD_IMAGE:
             return { ...state, ...action.image };
-        case DELETE_SPOT:
-            const newState = { ...state };
+        case DELETE_SPOT: {
+            let newState = { ...state };
             delete newState[action.spotId];
             return newState;
+        }
         default:
-            return state
+            return state;
     }
-}
+};

@@ -45,8 +45,8 @@ export default function SpotDetails() {
                         {spot.SpotImages.map(img => {
                             if (img.preview === false) {
                                 return (
-                                    <div id="side_imgs">
-                                        <img key={img.id} src={img.url} alt="imgs" />
+                                    <div key={img.id} id="side_imgs">
+                                        <img  src={img.url} alt="imgs" />
                                     </div>
                                 )
                             }

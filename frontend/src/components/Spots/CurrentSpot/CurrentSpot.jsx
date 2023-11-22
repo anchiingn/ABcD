@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { thunkFetchCurrentSpots } from "../../../store/spotReducer";
 import SpotItem from '../AllSpots/SpotItem';
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import OpenModalButton from "../../OpenModalButton/OpenModalButton";
 import DeleteSpot from "../DeleteSpot/DeleteSpot";
 
 export default function CurrentSpot() {
     const dispatch = useDispatch();
     const spots = useSelector(state => Object.values(state.spots.Spots || {}));
-    const navigation = useNavigate()
+    // const navigation = useNavigate()
     useEffect(() => {
         dispatch(thunkFetchCurrentSpots());
     }, [dispatch]);
@@ -26,8 +26,8 @@ export default function CurrentSpot() {
             <div>
                 <ul id="spotList">
                     {spots.map(spot => (
-                        <div>
-                            <SpotItem key={spot.id} spot={spot} />
+                        <div key={spot.id}>
+                            <SpotItem spot={spot} />
                             <NavLink to={`/spots/update/${spot.id}`}>
                                 <button>Update</button>
                             </NavLink>

@@ -1,4 +1,4 @@
-import { Modal } from "../../../context/Modal";
+// import { Modal } from "../../../context/Modal";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { thunkFetchUpdateReview } from "../../../store/reviewReducer";

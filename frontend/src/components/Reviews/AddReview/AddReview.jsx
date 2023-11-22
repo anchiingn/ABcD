@@ -1,7 +1,7 @@
-import { useModal } from "../../../context/Modal";
-import { useDispatch, useSelector } from "react-redux";
+// import { useModal } from "../../../context/Modal";
+import { useDispatch } from "react-redux";
 import { thunkFetchAddReview } from "../../../store/reviewReducer";
-import { thunkFetchSpotDetails } from "../../../store/spotReducer";
+// import { thunkFetchSpotDetails } from "../../../store/spotReducer";
 import { useState } from "react";
 
 export default function AddReviewModal({ spot }) {
@@ -11,6 +11,8 @@ export default function AddReviewModal({ spot }) {
     const dispatch = useDispatch();
 
     const onSubmit = async (e) => {
+        e.preventDefault()
+
         const newReview = {
             review,
             stars

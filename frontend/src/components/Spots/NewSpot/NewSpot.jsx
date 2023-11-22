@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { thunkFetchNewSpot, thunkFetchImg } from '../../../store/spotReducer';
 import { useNavigate } from 'react-router-dom';
-import './NewSPot.css';
+import './NewSpot.css';
 
 export default function NewSpot() {
     const [country, setCountry] = useState('');

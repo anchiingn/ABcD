@@ -60,7 +60,7 @@ export const thunkFetchUpdateReview = (updatedReview) => async (dispatch) => {
         body: JSON.stringify(updatedReview)
     });
     const review = await res.json();
-    dispatch(getSpot(review));
+    dispatch(thunkFetchReviews(review));
     return review
 }
 
@@ -77,7 +77,10 @@ export const thunkFetchRemoveReview = (reviewId) => async (dispatch) => {
 
 //reducer
 const initialState = {};
+
 export const reviewReducer = (state = initialState, action) => {
+    let newState; // Declare newState outside the switch
+
     switch (action.type) {
         case LOAD_REVIEWS:
             return { ...state, ...action.reviews };
@@ -86,10 +89,10 @@ export const reviewReducer = (state = initialState, action) => {
         case UPDATE_REVIEW:
             return { ...state, [action.review.id]: action.review };
         case DELETE_REVIEW:
-            const newState = { ...state };
+            newState = { ...state };
             delete newState[action.reviewId];
             return newState;
         default:
-            return state
+            return state;
     }
-}
+};
