@@ -41,34 +41,50 @@ function ProfileButton({ user }) {
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
+
   return (
     <>
-      <button onClick={toggleMenu}>
-        <i className="fas fa-user-circle" />
+      <button onClick={toggleMenu} id='profile_button'>
+        <i class="fa-solid fa-bars"></i>
+        <i class="fa-solid fa-user"></i>
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <div>Hello, {user.firstName}</div>
-            <div>{user.email}</div>
-            <NavLink to={'/spots/current'}> Manage Spots</NavLink>
-            {/* <NavLink to={'/reviews/current'}> Manage Reviews</NavLink> */}
-            <div>
-              <button onClick={logout}>Log Out</button>
+            <div className='logIn_signUp'>
+              <div id='user'>
+                <div className='user_name'>Hello, {user.firstName}</div>
+                <div className='user_name'>{user.email}</div>
+              </div>
+              <div id='manage_spot'>
+                <NavLink to={'/spots/current'} className='manage-spot-link'> Manage Spots</NavLink>
+              </div>
+              {/* <NavLink to={'/reviews/current'}> Manage Reviews</NavLink> */}
+              <div> 
+                <button id='logout_button' onClick={logout}>Log Out</button>
+              </div>
             </div>
           </>
         ) : (
           <>
-            <OpenModalMenuItem
-              itemText="Log In"
-              onItemClick={closeMenu}
-              modalComponent={<LoginFormModal />}
-            />
-            <OpenModalMenuItem
-              itemText="Sign Up"
-              onItemClick={closeMenu}
-              modalComponent={<SignupFormModal />}
-            />
+            <div>
+              <div className='logIn_signUp'>
+                <div className='log_sign_hover'>
+                  <OpenModalMenuItem
+                    itemText="Log In"
+                    onItemClick={closeMenu}
+                    modalComponent={<LoginFormModal />}
+                  />
+                </div>
+                <div className='log_sign_hover'>
+                  <OpenModalMenuItem
+                    itemText="Sign Up"
+                    onItemClick={closeMenu}
+                    modalComponent={<SignupFormModal />}
+                  />
+                </div>
+              </div>
+            </div>
           </>
         )}
       </ul>

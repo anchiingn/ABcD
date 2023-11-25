@@ -61,7 +61,7 @@ export default function NewSpot() {
             }
             imgs = [image1, image2, image3, image4];
             imgs.forEach(img => {
-                if (!img.endsWith('.jpg') || !img.endsWith('.png') || !img.endsWith('.jpeg')) {
+                if (img.trim() !== '' && !img.match(/\.(jpg|jpeg|png)$/)) {
                     error.imgs = "Image URL must end in .png, .jpg, or .jpeg"
                 }
             })

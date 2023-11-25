@@ -6,8 +6,9 @@ export default function DeleteSpot ({ spot }) {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
 
-    const removeSpot = () => {
-        dispatch(thunkFetchRemoveSpot(spot.id))
+    const removeSpot = async (e) => {
+        e.preventDefault()
+        await dispatch(thunkFetchRemoveSpot(spot.id))
         .then(closeModal)
     }
 

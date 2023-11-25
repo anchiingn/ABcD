@@ -85,7 +85,7 @@ export const reviewReducer = (state = initialState, action) => {
         case LOAD_REVIEWS:
             return { ...state, ...action.reviews };
         case ADD_REVIEWS:
-            return { ...state, [action.review.id]: action.review };
+            return { ...state, [action.reviews.id]: action.review };
         case UPDATE_REVIEW:
             return { ...state, [action.review.id]: action.review };
         case DELETE_REVIEW:

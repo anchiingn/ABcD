@@ -1,8 +1,15 @@
+body {
+    position: relative;
+}
 #nav {
+    position: sticky;
+    top: 0px;
     display: flex;
     justify-content: space-between;
-    margin: 1em;
+    padding: 1em;
     align-items: center;
+    background-color: white;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 ul>li:first-child {
@@ -10,10 +17,23 @@ ul>li:first-child {
     justify-content: center;
 }
 
+#logo {
+    display: flex;
+    align-items: center;
+}
+
 #logo_name {
     text-decoration: none;
     color: orangered;
     font-weight: bold;
+    font-size: 20px;
+    margin-top: 8px;
+}
+
+#logo_icon {
+    rotate: 180deg;
+    font-size: 2.5em;
+    
 }
 
 #logo_icon {
@@ -30,4 +50,7 @@ ul>li:first-child {
 
 #create_new_spot {
     margin-right: 1em;
+    font-size: 15px;
+    font-weight: 500;
 }
+

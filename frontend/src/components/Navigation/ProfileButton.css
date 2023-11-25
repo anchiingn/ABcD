@@ -1,3 +1,81 @@
 .hidden {
     display: none;
 }
+
+#profile_button {
+    padding: 6px;
+    padding-left: 15px;
+    border: 0.5px solid rgb(145, 151, 158);
+    background-color: white;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+#profile_button > i:first-child{
+    font-size: 18px;
+    padding-right: 15px;
+}
+
+#profile_button > i:nth-child(2) {
+    background-color: gray;
+    padding: 3px;
+    margin-right: 4px;
+    border-radius: 50%;
+    border: 5px solid gray;
+    color: white;
+    font-size: 20px;
+}
+
+.logIn_signUp {
+    position: fixed;
+    padding: 22px 22px 0px 22px;
+    padding-right: 4.5em;
+    top: 75px;
+    right: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    font-size: 16px;
+}
+
+.logIn_signUp > div {
+    margin-bottom: 20px;
+}
+
+.logIn_signUp > .log_sign_hover:hover {
+    color: orangered;
+    cursor: pointer;
+}
+
+#user > div:first-child{
+    margin-bottom: 10px;
+}
+
+#user {
+    padding-bottom: 20px;
+    border-bottom: 1px solid gray;
+}
+
+#user > .user_name:hover {
+    color: orangered;
+    cursor: pointer;
+}
+
+.manage-spot-link {
+    text-decoration: none;
+    color: black;
+}
+
+.manage-spot-link:hover {
+    color: orangered; 
+}
+
+#logout_button {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1.5px solid gray;
+}
+
+#logout_button:hover {
+    background-color: orangered;
+}

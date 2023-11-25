@@ -87,27 +87,10 @@ export default function UpdateSpot() {
             lng: parseFloat(longtitude),
             description,
             name,
-            price: parseFloat(price)
+            price: parseFloat(price),
         }
 
         const spot = await dispatch(thunkFetchUpdateSpot(spotId,newSpot));
-        // const newImage = {
-        //     preview,
-        //     image1,
-        //     image2,
-        //     image3,
-        //     image4
-        // }
-
-        // const validImageUrls = Object.values(newImage).filter(url => url.trim() !== ''); //cannot be empty
-
-        // let imgObj;
-        // validImageUrls.forEach(img => {
-        //     imgObj = { spotId: spot.id, url: img, preview: true }
-
-        // })
-
-        // await dispatch(thunkFetchImg(spot.id, imgObj));
 
         if (preview !== '') {
             const imageObj = { spotId: spot.id, url: preview, preview: true }
@@ -281,7 +264,7 @@ export default function UpdateSpot() {
                         <span className='errors'>{validation.imgs && `* ${validation.imgs}`}</span>
 
                         <div id='button'>
-                            <button disabled={Object.keys(validation).length > 0}>Create a Spot</button>
+                            <button disabled={Object.keys(validation).length > 0}>Update your Spot</button>
                         </div>
 
 

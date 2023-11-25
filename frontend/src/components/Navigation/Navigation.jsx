@@ -8,7 +8,7 @@ function Navigation({ isLoaded }) {
 
   return (
     <div id='nav'>
-      <div>
+      <div id='logo'>
         <i id='logo_icon' className="fa-brands fa-airbnb"></i>
         <NavLink id='logo_name' exact to="/">ABnC</NavLink>
       </div>
