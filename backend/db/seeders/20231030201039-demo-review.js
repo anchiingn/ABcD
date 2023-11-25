@@ -30,10 +30,22 @@ module.exports = {
         stars: 4
       },
       {
-        spotId: 3,
+        spotId: 4,
         userId: 2,
-        review:  "Not Nice!!",
-        stars: 1
+        review:  "WOW! Nice place!!",
+        stars: 5
+      },
+      {
+        spotId: 5,
+        userId: 1,
+        review:  "Nice!!",
+        stars: 2
+      },
+      {
+        spotId: 4,
+        userId: 1,
+        review:  "Needed cleaning",
+        stars: 3
       }
     ], { validate: true });
   },
