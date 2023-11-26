@@ -3,22 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { thunkFetchCurrentSpots } from "../../../store/spotReducer";
 import SpotItem from '../AllSpots/SpotItem';
-import './CurrentSpot.css'
-
-// import { useNavigate } from "react-router-dom";
 import OpenModalButton from "../../OpenModalButton/OpenModalButton";
 import DeleteSpot from "../DeleteSpot/DeleteSpot";
+import './CurrentSpot.css'
 
 export default function CurrentSpot() {
     const dispatch = useDispatch();
     const spots = useSelector(state => Object.values(state.spots.Spots || {}));
 
-    if (!spots) return null;
-    console.log(spots)
-    // const navigation = useNavigate()
     useEffect(() => {
         dispatch(thunkFetchCurrentSpots());
     }, [dispatch]);
+
+    if (!spots) {
+        return null;
+    }
 
     return (
         <>
@@ -53,7 +52,6 @@ export default function CurrentSpot() {
                         ))}
                     </ul>
                 </div>
-
             </div>
         </>
     )

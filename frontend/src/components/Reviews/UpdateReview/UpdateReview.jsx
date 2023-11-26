@@ -1,7 +1,6 @@
 // import { Modal } from "../../../context/Modal";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { useParams } from 'react-router-dom';
 import { thunkFetchUpdateReview } from "../../../store/reviewReducer";
 import './UpdateReview.css'
 
