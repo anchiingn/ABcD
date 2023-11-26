@@ -13,11 +13,13 @@ export default function DeleteReview ({ review }) {
 
     return (
         <>
-        <div>
+        <div id='login_container' className="delete_container">
             <div>Confirm Delete</div>
             <div>Are you sure you want to remove this review?</div>
-            <button onClick={removeReview}>Yes(Delete Review)</button>
-            <button onClick={closeModal}>No(Keep Review)</button>
+            <div>
+                <button onClick={removeReview}>Yes (Delete Review)</button>
+                <button onClick={closeModal}>No (Keep Review)</button>
+            </div>
         </div>
         </>
     ) 

@@ -1,0 +1,36 @@
+#manage_spots_container > div:first-child {
+    margin: 30px 40px;
+    font-size: 25px;
+}
+
+#manage_spots {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px;
+}
+
+#current_spot_list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 80em;
+}
+
+#delete_update_spot {
+    display: flex;
+}
+
+#update_spot {
+    margin-right: 15px;
+    padding: 3px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+#update_spot:hover {
+    background-color: gray;
+    color: white;
+}
+
+

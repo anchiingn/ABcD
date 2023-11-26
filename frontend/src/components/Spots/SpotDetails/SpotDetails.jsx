@@ -30,8 +30,8 @@ export default function SpotDetails() {
 
     return (
         <>
-            <div id="spot_contianer">
-                <h2>{spot.name}</h2>
+            <div id="spot_container">
+                <h1>{spot.name}</h1>
                 <h3>{spot.city}, {spot.state}, {spot.country}</h3>
                 <div id="imgs">
                     <div id="left_img">
@@ -53,21 +53,26 @@ export default function SpotDetails() {
                         })}
                     </div>
                 </div>
-                <div id="left_description">
-                    <h2>Hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h2>
-                    <p>{spot.description}</p>
-                </div>
-                <div id="right_review">
-                    <div>
-                        <div>${spot.price} night</div>
-                        <div>
-                            <i className="fa-solid fa-star"></i>
-                            {reviews.length === 0 ? 'New' : `${spot.avgRating} - ${spot.numReviews} 'Review'`}
-                        </div>
+
+                <div id="description_review">
+                    <div id="left_description">
+                        <h2>Hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h2>
+                        <p>{spot.description}</p>
                     </div>
-                    <button onClick={alertButt}>Reserve</button>
+                    <div id="right_review">
+                        <div>
+                            <div>${spot.price} night</div>
+                            <div>
+                                <i className="fa-solid fa-star"></i>
+                                {reviews.length === 0 ? 'New' : `${spot.avgRating} - ${spot.numReviews} Review`}
+                            </div>
+                        </div>
+                        <button onClick={alertButt}>Reserve</button>
+                    </div>
                 </div>
             </div>
+
+
             <div id="review_container">
                 <div>
                     <i className="fa-solid fa-star"></i>

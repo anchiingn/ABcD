@@ -1,0 +1,43 @@
+#update_text {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+#update_text > div {
+    font-weight: bold;
+}
+
+#update_textarea {
+    width: 30em;
+    height: 15em;
+    border-radius: 10px;
+    border: 1.5px solid grey;
+    margin-top: 10px;
+}
+
+#update_review_form {
+    display: flex;
+    justify-content: center;
+}
+
+#update_review_form > div:nth-child(2){
+    display: flex;
+    justify-content: center;
+}
+
+#star_rating > label > input {
+    display: none;
+}
+
+#star_rating > label > i {
+    margin: 10px 0;
+    font-size: 30px;
+    cursor: pointer;
+    color: black;
+}
+
+#update_review_form > button{
+    border-radius: 10px;
+    border: 1.5px solid grey;
+}

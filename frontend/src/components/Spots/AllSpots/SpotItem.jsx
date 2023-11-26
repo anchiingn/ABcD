@@ -6,10 +6,11 @@ import { NavLink } from 'react-router-dom';
 
 export default function SpotItem({ spot }) {
     // const sessionUser = useSelector((state) => state.session.user);
+    const pathName = window.location.pathname
 
     return (
         <div id='items'>
-            <NavLink exact to={`spots/${spot.id}`} style={{textDecoration: 'none', color: 'black'}}>
+            <NavLink exact to={pathName ?`/spots/${spot.id}` :'spots/current'} style={{textDecoration: 'none', color: 'black'}}>
                 <div id='img_container'>
                     {/* <div id='img'>Image Here</div> */}
                     <img src={`${spot.previewImage}`} alt={`${spot.name}`} />

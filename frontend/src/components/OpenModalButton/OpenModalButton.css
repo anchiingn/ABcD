@@ -1,0 +1,11 @@
+#modal_button {
+    margin-right: 15px;
+    padding: 3px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+#modal_button:hover {
+    background-color: gray;
+    color: white;
+}

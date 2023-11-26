@@ -1,0 +1,28 @@
+.delete_container > div:first-child {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.delete_container > div:nth-child(2) {
+    margin-bottom: 15px;
+}
+
+.delete_container > div:nth-child(3) {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.delete_container > div:nth-child(3) > button {
+    width: 31em;
+    height: 50px;
+    border-radius: 10px;
+    border: 1.5px solid grey;
+}
+
+.delete_container > div:nth-child(3) > button:hover {
+    background-color: orangered;
+    color: white;
+    cursor: pointer;
+}

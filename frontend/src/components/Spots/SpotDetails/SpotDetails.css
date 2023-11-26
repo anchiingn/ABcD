@@ -1,3 +1,12 @@
+#spot_container {
+    margin: 30px;
+}
+
+#spot_container > h3{
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
 #imgs {
     display: flex;
     justify-content: center;
@@ -6,25 +15,58 @@
 #preview_img {
     width: 45em;
     height: 30em;
+    border-radius: 20px;
     object-fit: cover;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 #right_imgs {
-    background-color: aqua;
+    /* background-color: aqua; */
     width: 38em;
     margin-left: 25px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    
 }
 
 #side_imgs  img{
+    border-radius: 15px;
     width: 18em;
-    height: 12em;
+    height: 13em;
+    margin: 8px;
+    margin-bottom: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
-
 
 #review_container {
     border-top: 2px solid black;
 }
 
+#description_review {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+#left_description {
+    width: 34em;
+}
+
+
+#left_description > h2, p {
+    margin-bottom: 10px;
+    text-align: justify;
+}
+
+#right_review {
+    border: 2px solid grey;
+    border-radius: 10px;
+    width: 25em;
+}
+
+#right_review > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+}

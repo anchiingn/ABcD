@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { thunkFetchUpdateSpot, thunkFetchImg} from '../../../store/spotReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { thunkFetchUpdateSpot, thunkFetchImg, thunkFetchSpotDetails} from '../../../store/spotReducer';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
@@ -27,6 +27,12 @@ export default function UpdateSpot() {
     const dispatch = useDispatch();
     const navigation = useNavigate()
     let imgs;
+
+    // const spotDetail = useSelector(state => state.spots.Spots)
+
+    // useEffect(() => {
+    //     dispatch(thunkFetchSpotDetails(spotId))
+    // },[spotId])
 
     useEffect(() => {
         const error = {};

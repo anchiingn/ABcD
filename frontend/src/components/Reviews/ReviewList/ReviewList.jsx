@@ -4,7 +4,8 @@ import OpenModalButton from '../../OpenModalButton/OpenModalButton';
 import DeleteReview from '../DeleteReview/DeleteReview';
 import UpdateReview from '../UpdateReview/UpdateReview';
 
-export default function ReviewList({ review, spots }) {
+export default function ReviewList({ review, spot }) {
+    console.log(spot)
     const sessionUser = useSelector((state) => state.session.user);
 
     const date = new Date(review.createdAt);
@@ -21,7 +22,7 @@ export default function ReviewList({ review, spots }) {
                 <>
                     <OpenModalButton
                         buttonText={'Update'}
-                        modalComponent={<UpdateReview spots={spots}/>}
+                        modalComponent={<UpdateReview spot={spot}/>}
                     />
                     <OpenModalButton
                         buttonText={'Delete'}

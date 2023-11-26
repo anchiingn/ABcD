@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
-// import { Navigate } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import './LoginForm.css';
 
 function LoginFormPage() {
@@ -11,13 +11,21 @@ function LoginFormPage() {
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  
+  // const navigation = useNavigate()
 
   if (sessionUser) return <Navigate to="/" replace={true} />;
+  
+  // useEffect(() => {
+  //   if (sessionUser) {
+  //     navigation('/')
+  //   };
+  // },[sessionUser,navigation])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({});
-    return dispatch(sessionActions.login({ credential, password }))
+    return  await dispatch(sessionActions.login({ credential, password }))
     .catch(async (res) => {
         const data = await res.json();
         if (data?.errors) setErrors(data.errors);
@@ -25,14 +33,15 @@ function LoginFormPage() {
     );
   };
 
-  const demo = (e) => {
+  const demo = async (e) => {
     e.preventDefault();
     setErrors({});
-    return dispatch(sessionActions.login({ credential: 'Demo-User', password: 'password' }))
+    return await dispatch(sessionActions.login({ credential: 'Demo-User', password: 'password' }))
     .catch(async (res) => {
-      const data = await res.json();
-      if (data?.errors) setErrors(data.errors);
-    });
+        const data = await res.json();
+        if (data?.errors) setErrors(data.errors);
+      }
+    )
   };
 
   return (
@@ -40,6 +49,7 @@ function LoginFormPage() {
       <div id='login_container'>
         <h1>Log In</h1>
         <form onSubmit={handleSubmit}>
+          {errors.credential && <p>{errors.credential}</p>}
           <label>
             Username or Email
           </label>
@@ -58,7 +68,6 @@ function LoginFormPage() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          {errors.credential && <p>{errors.credential}</p>}
           <button type="submit">Log In</button>
         </form>
         <div onClick={demo} id='demo-link'>Demo User</div>

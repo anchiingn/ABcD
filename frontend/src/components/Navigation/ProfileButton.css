@@ -56,9 +56,8 @@
     border-bottom: 1px solid gray;
 }
 
-#user > .user_name:hover {
-    color: orangered;
-    cursor: pointer;
+#user > .user_name {
+    color: black;
 }
 
 .manage-spot-link {

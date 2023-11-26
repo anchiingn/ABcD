@@ -17,7 +17,7 @@ export default function AllSpots() {
     return (
         <>
         <div id="spotList_container">
-            <ul id="spotList">
+            <ul className="spotList">
                 {spots.map(spot => (
                     <div id="spotItems" key={spot.id} to={`spots/${spot.id}`}>
                         <SpotItem key={spot.id} spot={spot}/>
