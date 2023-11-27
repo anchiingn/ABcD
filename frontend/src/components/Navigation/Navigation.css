@@ -23,6 +23,8 @@ ul>li:first-child {
 }
 
 #logo_name {
+    display: flex;
+    align-items: center;
     text-decoration: none;
     color: orangered;
     font-weight: bold;

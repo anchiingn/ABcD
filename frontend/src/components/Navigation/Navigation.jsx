@@ -9,8 +9,7 @@ function Navigation({ isLoaded }) {
   return (
     <div id='nav'>
       <div id='logo'>
-        <i id='logo_icon' className="fa-brands fa-airbnb"></i>
-        <NavLink id='logo_name' exact to="/">ABnC</NavLink>
+        <NavLink id='logo_name' exact to="/"><i id='logo_icon' className="fa-brands fa-airbnb"></i> ABnC</NavLink>
       </div>
       {isLoaded && (
         <div id='user_button'>

@@ -30,6 +30,7 @@ export default function SpotDetails() {
 
     return (
         <>
+        <div id='spot_detail_container'>
             <div id="spot_container">
                 <h1>{spot.name}</h1>
                 <h3>{spot.city}, {spot.state}, {spot.country}</h3>
@@ -61,10 +62,10 @@ export default function SpotDetails() {
                     </div>
                     <div id="right_review">
                         <div>
-                            <div>${spot.price} night</div>
+                            <div>${spot.price} <div>night</div></div>
                             <div>
                                 <i className="fa-solid fa-star"></i>
-                                {reviews.length === 0 ? 'New' : `${spot.avgRating} - ${spot.numReviews} Review`}
+                                {reviews.length === 0 ? 'New' : `${spot.avgRating} · ${spot.numReviews} ${spot.numReviews === 1 ? `Review` : `Reviews`}`}
                             </div>
                         </div>
                         <button onClick={alertButt}>Reserve</button>
@@ -76,7 +77,7 @@ export default function SpotDetails() {
             <div id="review_container">
                 <div>
                     <i className="fa-solid fa-star"></i>
-                    {reviews.length === 0 ? 'New' : `${spot.avgRating} - ${spot.numReviews} Review`}
+                    {reviews.length === 0 ? 'New' : `${spot.avgRating} · ${spot.numReviews} ${spot.numReviews === 1 ? `Review` : `Reviews`}`}
                 </div>
                 {sessionUser && sessionUser.id !== spot.ownerId && (
                     <OpenModalButton
@@ -90,6 +91,8 @@ export default function SpotDetails() {
                     </div>
                 })}
             </div>
+
+        </div>
         </>
     )
 }

@@ -1,6 +1,6 @@
 // import { Modal } from "../../../context/Modal";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { thunkFetchUpdateReview } from "../../../store/reviewReducer";
 import './UpdateReview.css'
 
@@ -8,11 +8,30 @@ export default function UpdateReview({ spot }) {
     const [stars, setStars] = useState('');
     const [review, setReview] = useState('');
     const [hover, setHover] = useState(0);
+    const [validation, setValidation] = useState({});
+    const [submit, setSubmit] = useState(false)
 
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        const error = {};
+        if (submit) {
+            if (!review) {
+                error.country = "Review is required";
+            }
+            if (!stars) {
+                error.star = 'star must be from 1 to 5'
+            }
+        }
+
+        setValidation(error)
+
+    }, [review, stars, submit])
+
     const onSubmit = async (e) => {
         e.preventDefault();
+
+        setSubmit(true)
 
         const newReview = {
             review,
@@ -26,6 +45,8 @@ export default function UpdateReview({ spot }) {
         <>
             <div id='login_container'>
                 <div id="update_text">How was your stay at <div>{spot?.name}</div></div>
+                {validation.review && <p className='signUp_error'>{validation.review}</p>}
+                {validation.star && <p className='signUp_error'>{validation.star}</p>}
                 <textarea
                     id="update_textarea"
                     placeholder="Update your review here..."

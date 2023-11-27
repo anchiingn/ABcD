@@ -177,9 +177,11 @@ router.get('/', async (req, res) => {
             reviews.push(spots.Reviews);
             reviews.forEach(review => {
                 review.forEach(star => {
+                    // console.log(star)
                     rate += star.stars / review.length
                 })
             });
+
             const images = [];
             images.push(spots.SpotImages);
             let preview;
@@ -348,9 +350,8 @@ router.get('/:spotId/reviews', async (req, res) => {
         res.json({ Review: review });
     }
     if (!review) {
-
+        res.status(404).json({ "message": "Spot couldn't be found" })
     }
-    res.status(404).json({ "message": "Spot couldn't be found" })
 });
 
 //Get all Bookings for a Spot based on the Spot's id

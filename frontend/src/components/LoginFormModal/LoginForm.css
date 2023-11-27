@@ -53,3 +53,7 @@
     color: orangered;
     cursor: pointer;
 }
+
+#logIn_error {
+    color: orangered;
+}
