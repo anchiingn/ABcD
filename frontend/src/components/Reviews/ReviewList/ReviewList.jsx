@@ -6,14 +6,15 @@ import './ReviewList.css';
 
 export default function ReviewList({ review, spot }) {
     const sessionUser = useSelector((state) => state.session.user);
-
-
+    
 
     const date = new Date(review.createdAt);
     const month = date.toLocaleString('default', { month: 'long' });
     const year = date.getFullYear();
 
     if (!review || !review.User) return null
+
+    
     return (
         <>
             <div id='reviewList_container'>

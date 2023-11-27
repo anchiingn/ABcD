@@ -1,20 +1,46 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { thunkFetchUpdateSpot, thunkFetchImg } from '../../../store/spotReducer';
+import { useDispatch,useSelector } from 'react-redux';
+import { thunkFetchUpdateSpot, thunkFetchImg, thunkFetchSpotDetails, thunkfetchUpdateImage} from '../../../store/spotReducer';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 export default function UpdateSpot() {
-    const [country, setCountry] = useState('');
-    const [address, setAddress] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [latitude, setLatitude] = useState('');
-    const [longtitude, setLongtitude] = useState('');
-    const [description, setDescription] = useState('');
-    const [name, setName] = useState('');
-    const [price, setPrice] = useState('');
-    const [preview, setPreview] = useState('');
+    const { spotId } = useParams();
+
+    const dispatch = useDispatch();
+    const navigation = useNavigate()
+    let imgs;
+
+    const spotDetail = useSelector(state => state.spots.Spots)
+
+    useEffect(() => {
+        dispatch(thunkFetchSpotDetails(spotId))
+    },[spotId])
+
+    // console.log(spotDetail)
+    // if (!spotDetail) return null
+
+    // const previewImg = spotDetail.SpotImages.forEach(img => img)
+    let previewImg;
+
+    for (let i = 0; i < spotDetail?.SpotImages?.length; i++) {
+        // console.log(spotDetail.SpotImages[0])
+        if (spotDetail?.SpotImages[i].preview){
+            previewImg  = spotDetail?.SpotImages[i];
+        }
+    }
+    // console.log(spotDetail?.country)
+
+    const [country, setCountry] = useState(spotDetail?.country);
+    const [address, setAddress] = useState(spotDetail?.address);
+    const [city, setCity] = useState(spotDetail?.city);
+    const [state, setState] = useState(spotDetail?.state);
+    const [latitude, setLatitude] = useState(spotDetail?.latitude);
+    const [longtitude, setLongtitude] = useState(spotDetail?.longtitude);
+    const [description, setDescription] = useState(spotDetail?.description);
+    const [name, setName] = useState(spotDetail?.name);
+    const [price, setPrice] = useState(spotDetail?.price);
+    const [preview, setPreview] = useState(previewImg?.url);
     const [image1, setImage1] = useState('');
     const [image2, setImage2] = useState('');
     const [image3, setImage3] = useState('');
@@ -22,14 +48,13 @@ export default function UpdateSpot() {
     const [validation, setValidation] = useState({});
     const [submit, setSubmit] = useState(false)
 
-    const { spotId } = useParams();
 
-    const dispatch = useDispatch();
-    const navigation = useNavigate()
-    let imgs;
+    console.log(country)
 
     useEffect(() => {
         const error = {};
+        // setCountry(spotDetail?.country)
+
         if (submit) {
             if (!country) {
                 error.country = "Country is required";
@@ -43,12 +68,12 @@ export default function UpdateSpot() {
             if (!state) {
                 error.state = "State is required";
             }
-            // if (!latitude) {
-            //     error.latitude = "Latitude is required";
-            // }
-            // if (!longtitude) {
-            //     error.longtitude = "Longtitude is required";
-            // }
+            if (!latitude) {
+                error.latitude = "Latitude is required";
+            }
+            if (!longtitude) {
+                error.longtitude = "Longtitude is required";
+            }
             if (!description) {
                 error.description = "Description needs a minimum of 30 characters";
             }
@@ -71,7 +96,7 @@ export default function UpdateSpot() {
 
         setValidation(error)
 
-    }, [country, address, city, state, description, name, price, preview, submit])
+    }, [country, address, city, state, latitude, longtitude, description, name, price, preview, submit])
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -83,8 +108,8 @@ export default function UpdateSpot() {
             address,
             city,
             state,
-            // lat: parseFloat(latitude),
-            // lng: parseFloat(longtitude),
+            lat: parseFloat(latitude),
+            lng: parseFloat(longtitude),
             description,
             name,
             price: parseFloat(price),
@@ -93,8 +118,13 @@ export default function UpdateSpot() {
         const spot = await dispatch(thunkFetchUpdateSpot(spotId,newSpot));
 
         if (preview !== '') {
-            const imageObj = { spotId: spot.id, url: preview, preview: true }
-            await dispatch(thunkFetchImg(spot.id,imageObj))
+            if (previewImg) {
+                const imageObj = { spotId: spot.id, url: preview, preview: true }
+                await dispatch(thunkfetchUpdateImage(spot.id, previewImg.id, imageObj))
+            } else {
+                const imageObj = { spotId: spot.id, url: preview, preview: true }
+                await dispatch(thunkFetchImg(spot.id,imageObj))
+            }
         }
 
         if (image1 !== '') {
@@ -117,7 +147,7 @@ export default function UpdateSpot() {
             await dispatch(thunkFetchImg(spot.id,imageObj))
         }
 
-        navigation(`./spots/${spot.id}`)
+        navigation(`/spots/${spot.id}`)
     }
 
     return (
@@ -133,8 +163,8 @@ export default function UpdateSpot() {
                         <label> Country</label>
                         <input
                             type="text"
-                            placeholder='Country'
-                            value={country}
+                            placeholder={spotDetail?.country}
+                            defaultValue={spotDetail?.country}
                             onChange={(e) => setCountry(e.target.value)}
                         />
                         <span className='errors'>{validation.country && `* ${validation.country}`}</span>
@@ -142,7 +172,7 @@ export default function UpdateSpot() {
                         <label> Street Address</label>
                         <input
                             type="text"
-                            placeholder='Adress'
+                            placeholder={spotDetail?.address}
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
                         />
@@ -151,7 +181,7 @@ export default function UpdateSpot() {
                         <label> City</label>
                         <input
                             type="text"
-                            placeholder='City'
+                            placeholder={spotDetail?.city}
                             value={city}
                             onChange={(e) => setCity(e.target.value)}
                         />
@@ -160,7 +190,7 @@ export default function UpdateSpot() {
                         <label> State</label>
                         <input
                             type="text"
-                            placeholder='State'
+                            placeholder={spotDetail?.state}
                             value={state}
                             onChange={e => setState(e.target.value)}
                         />
@@ -169,27 +199,27 @@ export default function UpdateSpot() {
                         <label> Latitude</label>
                         <input
                             type="text"
-                            placeholder='Latitude'
+                            placeholder={spotDetail?.lat}
                             value={latitude}
                             onChange={e => setLatitude(e.target.value)}
                         />
-                        {/* <span className='errors'>{validation.latitude && `* ${validation.latitude}`}</span> */}
+                        <span className='errors'>{validation.latitude && `* ${validation.latitude}`}</span>
 
                         <label> Longtitude</label>
                         <input
                             type="text"
-                            placeholder='Longtitude'
+                            placeholder={spotDetail?.lng}
                             value={longtitude}
                             onChange={e => setLongtitude(e.target.value)}
                         />
-                        {/* <span className='errors'>{validation.longtitude && `* ${validation.longtitude}`}</span> */}
+                        <span className='errors'>{validation.longtitude && `* ${validation.longtitude}`}</span>
 
 
                         <h4>Describe your place to guests</h4>
                         <p>Mention the best features of your space, any special amentities like <br />
                             fast wifi or parking, and what you love about the neighborhood.</p>
                         <textarea
-                            placeholder='Please write at least 30 characters'
+                            placeholder={spotDetail?.description}
                             value={description}
                             onChange={e => setDescription(e.target.value)}
                         />
@@ -200,7 +230,7 @@ export default function UpdateSpot() {
                             your place specials</p>
                         <input
                             type="text"
-                            placeholder='Name of your spot'
+                            placeholder={spotDetail?.name}
                             value={name}
                             onChange={e => setName(e.target.value)}
                         />
@@ -213,7 +243,7 @@ export default function UpdateSpot() {
                             $
                             <input
                                 type="text"
-                                placeholder='Price per night (USD)'
+                                placeholder={spotDetail?.price}
                                 value={price}
                                 onChange={e => setPrice(e.target.value)}
                             />
@@ -225,7 +255,7 @@ export default function UpdateSpot() {
                         <p>Submit a link to at least one photo to publish your spot</p>
                         <input
                             type="text"
-                            placeholder='Preview image URL'
+                            placeholder={spotDetail?.country}
                             value={preview}
                             onChange={e => setPreview(e.target.value)}
                         />

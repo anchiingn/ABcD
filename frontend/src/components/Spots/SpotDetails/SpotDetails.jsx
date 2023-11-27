@@ -24,6 +24,7 @@ export default function SpotDetails() {
 
     if (!reviews || !spot || !spot.SpotImages || !spot?.ownerId) return null;
 
+    console.log(reviews)
     const alertButt = () => {
         return alert('Feture Coming Soon...')
     }

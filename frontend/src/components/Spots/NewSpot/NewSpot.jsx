@@ -23,7 +23,7 @@ export default function NewSpot() {
     const [submit, setSubmit] = useState(false)
 
     const dispatch = useDispatch();
-    const navigation = useNavigate()
+    const navigation = useNavigate();
 
     let imgs;
     useEffect(() => {
@@ -116,7 +116,7 @@ export default function NewSpot() {
         }
 
 
-        navigation(`./spots/${spot.id}`)
+        navigation(`/spots/${spot.id}`)
 
     }
 

@@ -5,6 +5,7 @@ const GET_SPOT = 'spots/getSpot';
 const CREATE_SPOT = 'spots/createSpot';
 const ADD_IMAGE = 'spots/addSpotImage';
 const UPDATE_SPOT = 'spots/updateSpot';
+const UPDATE_IMAGE = 'spots/updateImage'
 const DELETE_SPOT = 'spots/deleteSpot'
 
 export const loadSpots = (spots) => ({
@@ -72,6 +73,19 @@ export const thunkFetchNewSpot = (spot) => async (dispatch) => {
 export const thunkFetchImg = (spotId, img) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}/images`, {
         method: "POST",
+        headers: { "Content-Type": "application/json", },
+        body: JSON.stringify(img)
+    })
+    if (res.ok) {
+        const image = await res.json();
+        dispatch(createSpot(image));
+        return image;
+    }
+}
+
+export const thunkfetchUpdateImage = (spotId, imageId, img) => async (dispatch) => {
+    const res = await csrfFetch(`/api/spots/${spotId}/images/${imageId}`, {
+        method: "PUT",
         headers: { "Content-Type": "application/json", },
         body: JSON.stringify(img)
     })
