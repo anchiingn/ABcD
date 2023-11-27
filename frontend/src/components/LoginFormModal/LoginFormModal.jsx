@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { useModal } from '../../context/Modal';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './LoginForm.css';
 
 function LoginFormPage() {
@@ -15,22 +15,19 @@ function LoginFormPage() {
 
   const { closeModal } = useModal();
   
-  // const navigation = useNavigate()  //useNavigate() not work
-
-  // if (sessionUser) return <Navigate to="/" replace={true} />;
+  const navigation = useNavigate() 
   
-  // useEffect(() => {
-  //   if (sessionUser) {
-  //     navigation('/')
-  //   };
-  // },[sessionUser,navigation])
+  useEffect(() => {
+    if (sessionUser) {
+      navigation('/')
+    };
+  },[sessionUser,navigation])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({});
-    if (sessionUser) {
+    if (!sessionUser) {
       return  await dispatch(sessionActions.login({ credential, password }))
-      .then(() => {if (sessionUser) return <Navigate to="/" replace={true} />})
       .then(closeModal)
       .catch(async (res) => {
           const data = await res.json();
@@ -38,6 +35,7 @@ function LoginFormPage() {
         }
       );
     }
+    
     return setErrors({
       credential: "The provided credentials were invalid",
       password: "Password is required"
@@ -47,7 +45,8 @@ function LoginFormPage() {
   const demo = async (e) => {
     e.preventDefault();
     setErrors({});
-    return await dispatch(sessionActions.login({ credential: 'Demo-User', password: 'password' }))
+    return await dispatch(sessionActions.login({ credential: 'Demo-lition', password: 'password' }))
+    .then(closeModal)
     .catch(async (res) => {
         const data = await res.json();
         if (data?.errors) setErrors(data.errors);
@@ -60,8 +59,8 @@ function LoginFormPage() {
       <div id='login_container'>
         <h1>Log In</h1>
         <form onSubmit={handleSubmit}>
-          {errors.credential && <p className='signUp_error'>{errors.credential}</p>}
-          {errors.password && <p className='signUp_error'>{errors.password}</p>}
+          {errors.credential && <p id='logIn_error'>{errors.credential}</p>}
+          {errors.password && <p id='logIn_error'>{errors.password}</p>}
           <label>
             Username or Email
           </label>

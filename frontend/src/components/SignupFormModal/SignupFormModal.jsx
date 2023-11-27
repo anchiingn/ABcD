@@ -51,12 +51,12 @@ function SignupFormModal() {
       <div id='login_container'>
         <h1>Sign Up</h1>
         <form onSubmit={handleSubmit}>
-          {errors.firstName && <p className='signUp_error'>{errors.firstName}</p>}
-          {errors.lastName && <p className='signUp_error'>{errors.lastName}</p>}
-          {errors.email && <p className='signUp_error'>{errors.email}</p>}
-          {errors.username && <p className='signUp_error'>{errors.username}</p>}
-          {errors.password && <p className='signUp_error'>{errors.password}</p>}
-          {errors.confirmPassword && (<p className='signUp_error'>{errors.confirmPassword}</p>)}
+          {errors.firstName && <p className='error'>{errors.firstName}</p>}
+          {errors.lastName && <p className='error'>{errors.lastName}</p>}
+          {errors.email && <p className='error'>{errors.email}</p>}
+          {errors.username && <p className='error'>{errors.username}</p>}
+          {errors.password && <p className='error'>{errors.password}</p>}
+          {errors.confirmPassword && (<p className='error'>{errors.confirmPassword}</p>)}
           <label>
             First Name
           </label>

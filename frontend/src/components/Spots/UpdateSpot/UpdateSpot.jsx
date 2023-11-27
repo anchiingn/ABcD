@@ -43,12 +43,12 @@ export default function UpdateSpot() {
             if (!state) {
                 error.state = "State is required";
             }
-            if (!latitude) {
-                error.latitude = "Latitude is required";
-            }
-            if (!longtitude) {
-                error.longtitude = "Longtitude is required";
-            }
+            // if (!latitude) {
+            //     error.latitude = "Latitude is required";
+            // }
+            // if (!longtitude) {
+            //     error.longtitude = "Longtitude is required";
+            // }
             if (!description) {
                 error.description = "Description needs a minimum of 30 characters";
             }
@@ -71,7 +71,7 @@ export default function UpdateSpot() {
 
         setValidation(error)
 
-    }, [country, address, city, state, latitude, longtitude, description, name, price, preview, submit])
+    }, [country, address, city, state, description, name, price, preview, submit])
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -83,8 +83,8 @@ export default function UpdateSpot() {
             address,
             city,
             state,
-            lat: parseFloat(latitude),
-            lng: parseFloat(longtitude),
+            // lat: parseFloat(latitude),
+            // lng: parseFloat(longtitude),
             description,
             name,
             price: parseFloat(price),
@@ -173,7 +173,7 @@ export default function UpdateSpot() {
                             value={latitude}
                             onChange={e => setLatitude(e.target.value)}
                         />
-                        <span className='errors'>{validation.latitude && `* ${validation.latitude}`}</span>
+                        {/* <span className='errors'>{validation.latitude && `* ${validation.latitude}`}</span> */}
 
                         <label> Longtitude</label>
                         <input
@@ -182,7 +182,7 @@ export default function UpdateSpot() {
                             value={longtitude}
                             onChange={e => setLongtitude(e.target.value)}
                         />
-                        <span className='errors'>{validation.longtitude && `* ${validation.longtitude}`}</span>
+                        {/* <span className='errors'>{validation.longtitude && `* ${validation.longtitude}`}</span> */}
 
 
                         <h4>Describe your place to guests</h4>

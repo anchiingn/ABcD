@@ -80,10 +80,12 @@ export default function SpotDetails() {
                     {reviews.length === 0 ? 'New' : `${spot.avgRating} · ${spot.numReviews} ${spot.numReviews === 1 ? `Review` : `Reviews`}`}
                 </div>
                 {sessionUser && sessionUser.id !== spot.ownerId && (
-                    <OpenModalButton
-                        buttonText='Post your Review'
-                        modalComponent={<AddReviewModal spot={spot} />}
-                    />
+                    <div id="post_review_button">
+                        <OpenModalButton
+                            buttonText='Post your Review'
+                            modalComponent={<AddReviewModal spot={spot} />}
+                        />
+                    </div>
                 )}
                 {reviews.map(review => {
                     return <div key={review.id}>

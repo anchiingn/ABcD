@@ -1,16 +1,20 @@
 import { useModal } from "../../../context/Modal";
 import { useDispatch } from "react-redux";
 import { thunkFetchRemoveSpot } from "../../../store/spotReducer";
+import { useNavigate } from "react-router-dom";
 import './DeleteSpot.css'
 
 export default function DeleteSpot ({ spot }) {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
+    const navigation = useNavigate()
 
     const removeSpot = async (e) => {
         e.preventDefault()
         await dispatch(thunkFetchRemoveSpot(spot.id))
         .then(closeModal)
+
+        navigation('/spot/current')
     }
 
     return (

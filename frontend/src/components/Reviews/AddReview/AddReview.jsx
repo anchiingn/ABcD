@@ -43,10 +43,10 @@ export default function AddReviewModal({ spot }) {
 
     return (
         <>
-            <div>
-                <div>How was your stay?</div>
-                {validation.review && <p className='signUp_error'>{validation.review}</p>}
-                {validation.star && <p className='signUp_error'>{validation.star}</p>}
+            <div id='login_container'>
+                <div id="update_text">How was your stay?</div>
+                {validation.review && <p className='error'>{validation.review}</p>}
+                {validation.star && <p className='error'>{validation.star}</p>}
                 <textarea
                     placeholder="Leave your review here..."
                     id="review_textBox"

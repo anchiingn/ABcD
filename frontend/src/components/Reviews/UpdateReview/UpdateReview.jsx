@@ -45,8 +45,8 @@ export default function UpdateReview({ spot }) {
         <>
             <div id='login_container'>
                 <div id="update_text">How was your stay at <div>{spot?.name}</div></div>
-                {validation.review && <p className='signUp_error'>{validation.review}</p>}
-                {validation.star && <p className='signUp_error'>{validation.star}</p>}
+                {validation.review && <p className='error'>{validation.review}</p>}
+                {validation.star && <p className='error'>{validation.star}</p>}
                 <textarea
                     id="update_textarea"
                     placeholder="Update your review here..."
