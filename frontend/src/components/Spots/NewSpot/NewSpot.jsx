@@ -42,10 +42,10 @@ export default function NewSpot() {
                 error.state = "State is required";
             }
             if (!latitude) {
-                error.latitude = "Latitude is required";
+                setLatitude(0)
             }
             if (!longtitude) {
-                error.longtitude = "Longtitude is required";
+                setLongtitude(0)
             }
             if (!description) {
                 error.description = "Description needs a minimum of 30 characters";
@@ -173,7 +173,7 @@ export default function NewSpot() {
                             value={latitude}
                             onChange={e => setLatitude(e.target.value)}
                         />
-                        <span className='errors'>{validation.latitude && `* ${validation.latitude}`}</span>
+                        {/* <span className='errors'>{validation.latitude && `* ${validation.latitude}`}</span> */}
 
                         <label> Longtitude</label>
                         <input
@@ -182,7 +182,7 @@ export default function NewSpot() {
                             value={longtitude}
                             onChange={e => setLongtitude(e.target.value)}
                         />
-                        <span className='errors'>{validation.longtitude && `* ${validation.longtitude}`}</span>
+                        {/* <span className='errors'>{validation.longtitude && `* ${validation.longtitude}`}</span> */}
 
 
                         <h4>Describe your place to guests</h4>

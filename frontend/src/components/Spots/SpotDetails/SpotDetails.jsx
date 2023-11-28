@@ -86,14 +86,14 @@ export default function SpotDetails() {
 
 
             <div id="review_container">
-                {spot.numReviews === 0 && sessionUser.id !== spot.ownerId ? <div>Be the first to post review</div> 
+                {spot.numReviews === 0 && sessionUser?.id !== spot.ownerId ? <div>Be the first to post review</div> 
                 :    <div>
                     <i className="fa-solid fa-star"></i>
                     {reviews.length === 0 ? 'New' : `${spot.avgRating} · ${spot.numReviews} ${spot.numReviews === 1 ? `Review` : `Reviews`}`}
                 </div>
             }
                 
-                {sessionUser && sessionUser.id !== spot.ownerId && !alreadyReview && (
+                {sessionUser && sessionUser?.id !== spot.ownerId && !alreadyReview && (
                     <div id="post_review_button">
                         <OpenModalButton
                             buttonText='Post your Review'

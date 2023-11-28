@@ -13,18 +13,20 @@ export default function AllSpots() {
     }, [dispatch]);
 
     if (!spots) return null;
-  
+
     return (
         <>
-        <div id="spotList_container">
-            <ul className="spotList">
-                {spots.map(spot => (
-                    <div id="spotItems" key={spot.id} to={`spots/${spot.id}`}>
-                        <SpotItem key={spot.id} spot={spot}/>
-                    </div>
-                ))}
-            </ul>
-        </div>
+            <div id="spotList_container">
+                <ul className="spotList">
+                    {spots.map(spot => (
+                        <div title={spot.name} key={spot.id}>
+                            <div id="spotItems" key={spot.id} to={`spots/${spot.id}`}>
+                                <SpotItem key={spot.id} spot={spot} />
+                            </div>
+                        </div>
+                    ))}
+                </ul>
+            </div>
         </>
     )
 }

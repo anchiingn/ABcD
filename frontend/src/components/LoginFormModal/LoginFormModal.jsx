@@ -53,14 +53,14 @@ function LoginFormPage() {
           console.log(data)
           if (data?.message === "Invalid credentials") setErrors({
             credential: 'The provided credentials were invalid',
-            password: "Password is required"
+           
           });
         }
       );
     }
     return setErrors({
       credential: 'The provided credentials were invalid',
-      password: "Password is required"
+     
     })
   };
 

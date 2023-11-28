@@ -30,14 +30,14 @@ export default function UpdateSpot() {
         }
     }
 
-    // console.log(spotDetail?.country)
+    console.log(spotDetail?.country)
 
     const [country, setCountry] = useState(spotDetail?.country);
     const [address, setAddress] = useState(spotDetail?.address);
     const [city, setCity] = useState(spotDetail?.city);
     const [state, setState] = useState(spotDetail?.state);
-    const [latitude, setLatitude] = useState(spotDetail?.latitude);
-    const [longtitude, setLongtitude] = useState(spotDetail?.longtitude);
+    const [latitude, setLatitude] = useState(spotDetail?.lat);
+    const [longtitude, setLongtitude] = useState(spotDetail?.lng);
     const [description, setDescription] = useState(spotDetail?.description);
     const [name, setName] = useState(spotDetail?.name);
     const [price, setPrice] = useState(spotDetail?.price);
@@ -49,12 +49,21 @@ export default function UpdateSpot() {
     const [validation, setValidation] = useState({});
     const [submit, setSubmit] = useState(false)
 
-
-    console.log(country)
-
     useEffect(() => {
         const error = {};
-        // setCountry(spotDetail?.country)
+        if (spotDetail) {
+            setCountry(country ? country : spotDetail.country)
+            setAddress(address ? address : spotDetail.address)
+            setCity(city ? city : spotDetail.city)
+            setState(state ? state : spotDetail.state)
+            setLatitude(latitude ? latitude : spotDetail.lat)
+            setLongtitude(longtitude ? longtitude : spotDetail.lng)
+            setDescription(description ? description : spotDetail.description)
+            setName(name ? name : spotDetail.name)
+            setPrice(price ? price : spotDetail.price)
+            setPreview(previewImg?.url)
+        }
+
 
         if (submit) {
             if (!country) {
@@ -70,10 +79,10 @@ export default function UpdateSpot() {
                 error.state = "State is required";
             }
             if (!latitude) {
-                error.latitude = "Latitude is required";
+                setLatitude(0)
             }
             if (!longtitude) {
-                error.longtitude = "Longtitude is required";
+                setLongtitude(0)
             }
             if (!description) {
                 error.description = "Description needs a minimum of 30 characters";
