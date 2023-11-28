@@ -59,7 +59,7 @@ export default function NewSpot() {
                 error.preview = "Preview is required";
             }
             
-                
+                 
         }
 
         setValidation(error)
@@ -68,6 +68,7 @@ export default function NewSpot() {
 
     const onSubmit = async (e) => {
         e.preventDefault()
+        
         setSubmit(true)
 
 
