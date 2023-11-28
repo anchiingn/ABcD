@@ -1,14 +1,22 @@
+
+
 <!--!!START SILENT -->
 # ABcD
 <!--!!END -->
 <!--!!ADD -->
 <!-- # `<name of application here>` -->
 <!--!!END_ADD -->
+![Screen 1](./images/Screen1.png)
+![Screen 2](./images/Screen2.png)
+
+Live link: https://abcd-oqcz.onrender.com
+
+My backend is built on the Express framework, utilizing Sequelize as an interface to communicate with the database. Meanwhile, My frontend is exclusively crafted using React and Redux libraries.
 
 ## Database Schema Design
+![airbnb-database-schema]
 
 <!--!!START SILENT -->
-![airbnb-database-schema]
 
 [airbnb-database-schema]: ./images/airbnb_dbdiagram.png
 <!--!!END -->
