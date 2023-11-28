@@ -25,7 +25,6 @@ export default function NewSpot() {
     const dispatch = useDispatch();
     const navigation = useNavigate();
 
-    let imgs;
     useEffect(() => {
         const error = {};
         if (submit) {
@@ -47,7 +46,7 @@ export default function NewSpot() {
             if (!longtitude) {
                 setLongtitude(0)
             }
-            if (!description) {
+            if (description.length < 30) {
                 error.description = "Description needs a minimum of 30 characters";
             }
             if (!name) {
@@ -59,17 +58,24 @@ export default function NewSpot() {
             if (!preview) {
                 error.preview = "Preview is required";
             }
-            imgs = [image1, image2, image3, image4];
-            imgs.forEach(img => {
-                if (img.trim() !== '' && !img.match(/\.(jpg|jpeg|png)$/)) {
-                    error.imgs = "Image URL must end in .png, .jpg, or .jpeg"
-                }
-            })
+            
+                // if (!image1.match(/\.(jpg|jpeg|png)$/)) {
+                //     error.image1 = "Image URL must end in .png, .jpg, or .jpeg"
+                // }
+                // if (!image2.match(/\.(jpg|jpeg|png)$/)) {
+                //     error.image2 = "Image URL must end in .png, .jpg, or .jpeg"
+                // }
+                // if (!image3.match(/\.(jpg|jpeg|png)$/)) {
+                //     error.image3 = "Image URL must end in .png, .jpg, or .jpeg"
+                // }
+                // if (!image4.match(/\.(jpg|jpeg|png)$/)) {
+                //     error.image4 = "Image URL must end in .png, .jpg, or .jpeg"
+                // }
         }
 
         setValidation(error)
 
-    }, [country, address, city, state, latitude, longtitude, description, name, price, preview, submit])
+    }, [country, address, city, state, latitude, longtitude, description, name, price, preview, image1, image2, image3, image4, submit])
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -92,27 +98,27 @@ export default function NewSpot() {
 
         if (preview !== '') {
             const imageObj = { spotId: spot.id, url: preview, preview: true }
-            await dispatch(thunkFetchImg(spot.id,imageObj))
+            await dispatch(thunkFetchImg(spot.id, imageObj))
         }
 
         if (image1 !== '') {
             const imageObj = { spotId: spot.id, url: image1, preview: false }
-            await dispatch(thunkFetchImg(spot.id,imageObj))
+            await dispatch(thunkFetchImg(spot.id, imageObj))
         }
 
         if (image2 !== '') {
             const imageObj = { spotId: spot.id, url: image2, preview: false }
-            await dispatch(thunkFetchImg(spot.id,imageObj))
+            await dispatch(thunkFetchImg(spot.id, imageObj))
         }
 
         if (image3 !== '') {
             const imageObj = { spotId: spot.id, url: image3, preview: false }
-            await dispatch(thunkFetchImg(spot.id,imageObj))
+            await dispatch(thunkFetchImg(spot.id, imageObj))
         }
 
         if (image4 !== '') {
             const imageObj = { spotId: spot.id, url: image4, preview: false }
-            await dispatch(thunkFetchImg(spot.id,imageObj))
+            await dispatch(thunkFetchImg(spot.id, imageObj))
         }
 
 
@@ -166,23 +172,25 @@ export default function NewSpot() {
                         />
                         <span className='errors'>{validation.state && `* ${validation.state}`}</span>
 
-                        <label> Latitude</label>
-                        <input
-                            type="text"
-                            placeholder='Latitude'
-                            value={latitude}
-                            onChange={e => setLatitude(e.target.value)}
-                        />
-                        {/* <span className='errors'>{validation.latitude && `* ${validation.latitude}`}</span> */}
-
-                        <label> Longtitude</label>
-                        <input
-                            type="text"
-                            placeholder='Longtitude'
-                            value={longtitude}
-                            onChange={e => setLongtitude(e.target.value)}
-                        />
-                        {/* <span className='errors'>{validation.longtitude && `* ${validation.longtitude}`}</span> */}
+                        <div className='lat_lng'>
+                            <label> Latitude</label>
+                            <input
+                                type="text"
+                                placeholder='Latitude'
+                                value={latitude}
+                                onChange={e => setLatitude(e.target.value)}
+                            />
+                            {/* <span className='errors'>{validation.latitude && `* ${validation.latitude}`}</span> */}
+                            ,
+                            <label> Longtitude</label>
+                            <input
+                                type="text"
+                                placeholder='Longtitude'
+                                value={longtitude}
+                                onChange={e => setLongtitude(e.target.value)}
+                            />
+                            {/* <span className='errors'>{validation.longtitude && `* ${validation.longtitude}`}</span> */}
+                        </div>
 
 
                         <h4>Describe your place to guests</h4>
@@ -237,7 +245,7 @@ export default function NewSpot() {
                             value={image1}
                             onChange={e => setImage1(e.target.value)}
                         />
-                        <span className='errors'>{validation.imgs && `* ${validation.imgs}`}</span>
+                        <span className='errors'>{validation.image1 && `* ${validation.image1}`}</span>
 
                         <input
                             type="text"
@@ -245,7 +253,7 @@ export default function NewSpot() {
                             value={image2}
                             onChange={e => setImage2(e.target.value)}
                         />
-                        <span className='errors'>{validation.imgs && `* ${validation.imgs}`}</span>
+                        <span className='errors'>{validation.image2 && `* ${validation.image2}`}</span>
 
                         <input
                             type="text"
@@ -253,7 +261,7 @@ export default function NewSpot() {
                             value={image3}
                             onChange={e => setImage3(e.target.value)}
                         />
-                        <span className='errors'>{validation.imgs && `* ${validation.imgs}`}</span>
+                        <span className='errors'>{validation.image3 && `* ${validation.image3}`}</span>
 
                         <input
                             type="text"
@@ -261,7 +269,7 @@ export default function NewSpot() {
                             value={image4}
                             onChange={e => setImage4(e.target.value)}
                         />
-                        <span className='errors'>{validation.imgs && `* ${validation.imgs}`}</span>
+                        <span className='errors'>{validation.image4 && `* ${validation.image4}`}</span>
 
                         <div id='button'>
                             <button disabled={Object.keys(validation).length > 0}>Create a Spot</button>

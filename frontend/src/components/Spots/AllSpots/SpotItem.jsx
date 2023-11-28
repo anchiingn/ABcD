@@ -20,7 +20,7 @@ export default function SpotItem({ spot }) {
                         <div>{spot.city}, {spot.state}</div>
                         <div>${spot.price} <div>night</div></div>
                     </div>
-                    {spot.avgRating !== 0 ?
+                    {spot.avgRating > 0 ?
                         <div id='text_right'>
                             <div>
                             <i className="fa-solid fa-star"></i>

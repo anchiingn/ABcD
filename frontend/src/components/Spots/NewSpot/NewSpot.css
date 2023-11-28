@@ -32,9 +32,27 @@ h4, #button {
     padding: 0.5em 0;
     width: 8em;
     margin-bottom: 5em;
+    margin-top: 5px;
+    cursor: pointer;
 }
 
 .errors {
     color: red;
     font-size: 10px;
+}
+
+.lat_lng {
+    margin-top: 5px;
+}
+
+.lat_lng > label {
+    margin-right: 10px;
+}
+
+#new_spot_form > input {
+    margin-bottom: 10px;
+}
+
+#new_spot_form > label {
+    margin-bottom: 5px;
 }

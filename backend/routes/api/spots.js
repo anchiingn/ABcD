@@ -155,10 +155,10 @@ router.get('/', async (req, res) => {
                 lng: parseFloat(spots.lng),
                 name: spots.name,
                 description: spots.description,
-                price: parseFloat(spots.price),
+                price: parseFloat(spots.price).toFixed(2),
                 createdAt: spots.createdAt,
                 updatedAt: spots.updatedAt,
-                avgRating: rate,
+                avgRating: rate.toFixed(2),
                 previewImage: imageUrl
             }
         });
@@ -209,10 +209,10 @@ router.get('/', async (req, res) => {
                 lng: parseFloat(spots.lng),
                 name: spots.name,
                 description: spots.description,
-                price: parseFloat(spots.price),
+                price: parseFloat(spots.price).toFixed(2),
                 createdAt: spots.createdAt,
                 updatedAt: spots.updatedAt,
-                avgRating: rate,
+                avgRating: rate.toFixed(2),
                 previewImage: imageUrl
             }
         });
@@ -281,10 +281,10 @@ router.get('/current', requireAuth, async (req, res) => {
             lng: parseFloat(spots.lng),
             name: spots.name,
             description: spots.description,
-            price: parseFloat(spots.price),
+            price: parseFloat(spots.price).toFixed(2),
             createdAt: spots.createdAt,
             updatedAt: spots.updatedAt,
-            avgRating: rate,
+            avgRating: rate.toFixed(2),
             previewImage: imageUrl
         }
     });
@@ -323,10 +323,12 @@ router.get('/:spotId', async (req, res) => {
     });
 
     spotJSON.numReviews = reviewCount;
-    spotJSON.avgRating = rate;
+    spotJSON.avgRating = rate.toFixed(2);
     delete spotJSON.Reviews
 
-    res.json({ Spots: spotJSON })
+    const spotDetail = { ...spotJSON, price: parseFloat(spotJSON.price).toFixed(2) };
+
+    res.json({ Spots: spotDetail })
 });
 
 //Get all Reviews by a Spot's id
