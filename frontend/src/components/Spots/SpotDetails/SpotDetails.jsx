@@ -34,7 +34,7 @@ export default function SpotDetails() {
 
     for (let i = 0; i < reviews.length; i++) {
         // console.log(reviews[i])
-        if (reviews[i].userId === sessionUser.id) {
+        if (reviews[i].userId === sessionUser?.id) {
             alreadyReview = true
         }
     }

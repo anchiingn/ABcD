@@ -22,9 +22,6 @@ export default function AddReviewModal({ spot }) {
             if (review.length < 10 ) {
                 error.review = "Review need 10 chracter long";
             }
-            // if (review) {
-            //     error.review = "YOu already review for this spot";
-            // }
             if (!stars) {
                 error.star = 'star must be from 1 to 5'
             }
@@ -42,6 +39,10 @@ export default function AddReviewModal({ spot }) {
         const newReview = {
             review,
             stars
+        }
+
+        if (review.length < 10 || !stars) {
+            return
         }
 
         await dispatch(thunkFetchAddReview(spot?.id, newReview))
@@ -92,7 +93,7 @@ export default function AddReviewModal({ spot }) {
                     <div>
                         {stars ? (stars === '1' ? `${stars} Star` : `${stars} Stars`) : ''}
                     </div>
-                    <button type="submit" disabled={Object.keys(validation).length > 0}>Submit Your Review</button>
+                    <button type="submit" disabled={review.length < 10 && !stars}>Submit Your Review</button>
                 </form>
             </div>
 

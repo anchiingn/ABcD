@@ -50,6 +50,7 @@ function LoginFormPage() {
       .then(closeModal)
       .catch(async (res) => {
           const data = await res.json();
+          console.log(data)
           if (data?.message === "Invalid credentials") setErrors({
             credential: 'The provided credentials were invalid',
             password: "Password is required"

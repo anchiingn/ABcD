@@ -29,6 +29,7 @@ export default function UpdateSpot() {
             previewImg  = spotDetail?.SpotImages[i];
         }
     }
+
     // console.log(spotDetail?.country)
 
     const [country, setCountry] = useState(spotDetail?.country);
@@ -102,6 +103,7 @@ export default function UpdateSpot() {
         e.preventDefault()
         setSubmit(true)
 
+        console.log(e)
 
         const newSpot = {
             country,
@@ -165,6 +167,7 @@ export default function UpdateSpot() {
                             type="text"
                             placeholder={spotDetail?.country}
                             defaultValue={spotDetail?.country}
+                            // value={country}
                             onChange={(e) => setCountry(e.target.value)}
                         />
                         <span className='errors'>{validation.country && `* ${validation.country}`}</span>
