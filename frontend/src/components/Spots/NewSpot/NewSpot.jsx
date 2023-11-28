@@ -55,9 +55,9 @@ export default function NewSpot() {
             if (!price) {
                 error.price = "Price is required";
             }
-            // if (!preview) {
-            //     error.preview = "Preview is required";
-            // }
+            if (!preview) {
+                error.preview = "Preview is required";
+            }
             
                 
         }
@@ -91,25 +91,24 @@ export default function NewSpot() {
         }
 
         if (image1 !== '') {
-            const img1 = { spotId: spot.id, url: image1, preview: false };
-            await dispatch(thunkFetchImg(spot.id, img1));
+            const image1 = { spotId: spot.id, url: image1, preview: false }
+            await dispatch(thunkFetchImg(spot.id, image1))
         }
-        
+
         if (image2 !== '') {
-            const img2 = { spotId: spot.id, url: image2, preview: false };
-            await dispatch(thunkFetchImg(spot.id, img2));
+            const image2 = { spotId: spot.id, url: image2, preview: false }
+            await dispatch(thunkFetchImg(spot.id, image2))
         }
-        
+
         if (image3 !== '') {
-            const img3 = { spotId: spot.id, url: image3, preview: false };
-            await dispatch(thunkFetchImg(spot.id, img3));
+            const image3 = { spotId: spot.id, url: image3, preview: false }
+            await dispatch(thunkFetchImg(spot.id, image3))
         }
-        
+
         if (image4 !== '') {
-            const img4 = { spotId: spot.id, url: image4, preview: false };
-            await dispatch(thunkFetchImg(spot.id, img4));
+            const image4 = { spotId: spot.id, url: image4, preview: false }
+            await dispatch(thunkFetchImg(spot.id, image4))
         }
-        
 
 
         navigation(`/spots/${spot.id}`)
@@ -227,7 +226,7 @@ export default function NewSpot() {
                             value={preview}
                             onChange={e => setPreview(e.target.value)}
                         />
-                        {/* <span className='errors'>{validation.preview && `* ${validation.preview}`}</span> */}
+                        <span className='errors'>{validation.preview && `* ${validation.preview}`}</span>
 
                         <input
                             type="text"
