@@ -5,6 +5,7 @@ const GET_SPOT = 'spots/getSpot';
 const CREATE_SPOT = 'spots/createSpot';
 const ADD_IMAGE = 'spots/addSpotImage';
 const UPDATE_SPOT = 'spots/updateSpot';
+const UPDATE_IMAGE = 'spots/updateImage';
 const DELETE_SPOT = 'spots/deleteSpot'
 
 export const loadSpots = (spots) => ({
@@ -24,6 +25,11 @@ export const createSpot = (spot) => ({
 
 export const addSpotImage = (image) => ({
     type: ADD_IMAGE,
+    image
+})
+
+export const updateSpotImage = (image) => ({
+    type: UPDATE_IMAGE,
     image
 })
 
@@ -90,12 +96,12 @@ export const thunkfetchUpdateImage = (spotId, imageId, img) => async (dispatch) 
     })
     if (res.ok) {
         const image = await res.json();
-        dispatch(createSpot(image));
+        dispatch(updateSpotImage(image));
         return image;
     }
 }
 
-export const thunkFetchUpdateSpot = (spotId,updatedSpot) => async (dispatch) => {
+export const thunkFetchUpdateSpot = (spotId, updatedSpot) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -133,6 +139,8 @@ export const spotsReducer = (state = initialState, action) => {
             return { ...state, [action.spot.id]: action.spot };
         case ADD_IMAGE:
             return { ...state, ...action.image };
+        case UPDATE_IMAGE:
+            return { ...state, [action.image.id]: action.image };
         case DELETE_SPOT: {
             let newState = { ...state };
             delete newState[action.spotId];

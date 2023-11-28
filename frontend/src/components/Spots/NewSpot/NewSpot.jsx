@@ -55,9 +55,9 @@ export default function NewSpot() {
             if (!price) {
                 error.price = "Price is required";
             }
-            if (!preview) {
-                error.preview = "Preview is required";
-            }
+            // if (!preview) {
+            //     error.preview = "Preview is required";
+            // }
             
                 
         }
@@ -227,7 +227,7 @@ export default function NewSpot() {
                             value={preview}
                             onChange={e => setPreview(e.target.value)}
                         />
-                        <span className='errors'>{validation.preview && `* ${validation.preview}`}</span>
+                        {/* <span className='errors'>{validation.preview && `* ${validation.preview}`}</span> */}
 
                         <input
                             type="text"
