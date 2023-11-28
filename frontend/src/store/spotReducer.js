@@ -5,7 +5,6 @@ const GET_SPOT = 'spots/getSpot';
 const CREATE_SPOT = 'spots/createSpot';
 const ADD_IMAGE = 'spots/addSpotImage';
 const UPDATE_SPOT = 'spots/updateSpot';
-const UPDATE_IMAGE = 'spots/updateImage'
 const DELETE_SPOT = 'spots/deleteSpot'
 
 export const loadSpots = (spots) => ({
@@ -109,12 +108,14 @@ export const thunkFetchUpdateSpot = (spotId,updatedSpot) => async (dispatch) => 
 
 export const thunkFetchRemoveSpot = (spotId) => async (dispatch) => {
     const res = await csrfFetch(`/api/spots/${spotId}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: { "Content-Type": "application/json" },
     })
 
     if (res.ok) {
         dispatch(deleteSpot(spotId))
     }
+    return spotId
 }
 
 //reducer

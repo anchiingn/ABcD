@@ -1,13 +1,23 @@
 import { useModal } from "../../../context/Modal";
-import { thunkFetchRemoveReview } from "../../../store/reviewReducer";
+import { thunkFetchRemoveReview, thunkFetchReviews } from "../../../store/reviewReducer";
+import { thunkFetchSpotDetails } from "../../../store/spotReducer";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
-export default function DeleteReview ({ review }) {
+
+export default function DeleteReview ({ review, spot }) {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
+    const navigation = useNavigate()
 
-    const removeReview = () => {
-        dispatch(thunkFetchRemoveReview(review.id))
+    const removeReview = async (e) => {
+        e.preventDefault()
+
+        await dispatch(thunkFetchRemoveReview(review.id))
+        await dispatch(thunkFetchReviews(spot.id))
+        await dispatch(thunkFetchSpotDetails(spot.id))
+        .then(navigation(`spots/${spot.id}`))
         .then(closeModal)
     }
 

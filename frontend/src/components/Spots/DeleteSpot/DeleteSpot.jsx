@@ -12,9 +12,10 @@ export default function DeleteSpot ({ spot }) {
     const removeSpot = async (e) => {
         e.preventDefault()
         await dispatch(thunkFetchRemoveSpot(spot.id))
+        await dispatch(thunkFetchCurrentSpots())
+        .then(navigation('/spots/current'))
         .then(closeModal)
 
-        navigation('/spots/current')
     }
 
     return (

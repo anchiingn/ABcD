@@ -14,8 +14,8 @@ export default function SpotDetails() {
     const spot = useSelector(state => state.spots.Spots || null);
     const reviews = useSelector(state => state.review.Review || []);
     const sessionUser = useSelector((state) => state.session.user);
-
-
+    // console.log(reviews)
+    console.log(sessionUser)
     useEffect(() => {
         dispatch(thunkFetchSpotDetails(spotId));
         dispatch(thunkFetchReviews(spotId))
@@ -24,9 +24,19 @@ export default function SpotDetails() {
 
     if (!reviews || !spot || !spot.SpotImages || !spot?.ownerId) return null;
 
-    console.log(reviews)
+    // console.log(reviews)
     const alertButt = () => {
         return alert('Feture Coming Soon...')
+    }
+
+    let alreadyReview = false;
+
+
+    for (let i = 0; i < reviews.length; i++) {
+        // console.log(reviews[i])
+        if (reviews[i].userId === sessionUser.id) {
+            alreadyReview = true
+        }
     }
 
     return (
@@ -76,11 +86,14 @@ export default function SpotDetails() {
 
 
             <div id="review_container">
-                <div>
+                {spot.numReviews === 0 && sessionUser.id !== spot.ownerId ? <div>Be the first to post review</div> 
+                :    <div>
                     <i className="fa-solid fa-star"></i>
                     {reviews.length === 0 ? 'New' : `${spot.avgRating} · ${spot.numReviews} ${spot.numReviews === 1 ? `Review` : `Reviews`}`}
                 </div>
-                {sessionUser && sessionUser.id !== spot.ownerId && (
+            }
+                
+                {sessionUser && sessionUser.id !== spot.ownerId && !alreadyReview && (
                     <div id="post_review_button">
                         <OpenModalButton
                             buttonText='Post your Review'

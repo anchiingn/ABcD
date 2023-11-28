@@ -18,6 +18,7 @@ export default function ReviewList({ review, spot }) {
     return (
         <>
             <div id='reviewList_container'>
+                
                 <div>{review.User.firstName}</div>
                 <div>{month} {year}</div>
                 <div>{review.review}</div>
@@ -29,7 +30,7 @@ export default function ReviewList({ review, spot }) {
                         />
                         <OpenModalButton
                             buttonText={'Delete'}
-                            modalComponent={<DeleteReview review={review} />}
+                            modalComponent={<DeleteReview review={review} spot={spot}/>}
                         />
                     </>
                 )}

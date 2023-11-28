@@ -14,6 +14,7 @@ function SignupFormModal() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
+  const [disableButton, setDisableButton] = useState(true)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,6 +47,15 @@ function SignupFormModal() {
     });
   };
 
+  const toggleButton = () => {
+    if (firstName && lastName && email && username.length >= 4 && password.length >= 6 && confirmPassword) {
+      setDisableButton(false)
+    }
+    else {
+      setDisableButton(true)
+    }
+  }
+
   return (
     <>
       <div id='login_container'>
@@ -64,6 +74,7 @@ function SignupFormModal() {
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
+            onKeyUp={(e) => toggleButton(e.target.value)}
           />
           <label>
             Last Name
@@ -88,6 +99,7 @@ function SignupFormModal() {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            onKeyUp={(e) => toggleButton(e.target.value)}
           />
           <label>
             Password
@@ -96,6 +108,7 @@ function SignupFormModal() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onKeyUp={(e) => toggleButton(e.target.value)}
           />
           <label>
             Confirm Password
@@ -105,7 +118,7 @@ function SignupFormModal() {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-          <button type="submit">Sign Up</button>
+          <button type="submit" disabled={disableButton}>Sign Up</button>
         </form>
       </div>
     </>

@@ -335,6 +335,7 @@ router.get('/:spotId/reviews', async (req, res) => {
         where: {
             spotId: req.params.spotId
         },
+        order: [['updatedAt', 'DESC']],
         include: [
             {
                 model: User,
@@ -512,6 +513,9 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
             review,
             stars
         })
+
+
+
         return res.json(reviews);
     }
 

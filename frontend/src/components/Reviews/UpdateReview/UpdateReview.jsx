@@ -1,7 +1,8 @@
 // import { Modal } from "../../../context/Modal";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { thunkFetchUpdateReview } from "../../../store/reviewReducer";
+import { thunkFetchUpdateReview, thunkFetchReviews } from "../../../store/reviewReducer";
+import { useNavigate } from "react-router-dom";
 import './UpdateReview.css'
 
 export default function UpdateReview({ spot }) {
@@ -12,6 +13,7 @@ export default function UpdateReview({ spot }) {
     const [submit, setSubmit] = useState(false)
 
     const dispatch = useDispatch();
+    const navigation = useNavigate()
 
     useEffect(() => {
         const error = {};
@@ -38,7 +40,10 @@ export default function UpdateReview({ spot }) {
             stars
         };
 
-        await dispatch(thunkFetchUpdateReview(newReview));
+        await dispatch(thunkFetchUpdateReview(newReview))
+        await dispatch(thunkFetchReviews(spot.id))
+        .then(navigation(`spots/${spot.id}`))
+        // .then(closeModal)
     };
 
     return (

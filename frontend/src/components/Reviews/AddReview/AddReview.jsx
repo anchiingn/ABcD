@@ -1,8 +1,9 @@
-// import { useModal } from "../../../context/Modal";
+import { useModal } from "../../../context/Modal";
 import { useDispatch } from "react-redux";
-import { thunkFetchAddReview } from "../../../store/reviewReducer";
-// import { thunkFetchSpotDetails } from "../../../store/spotReducer";
+import { thunkFetchAddReview, thunkFetchReviews } from "../../../store/reviewReducer";
+import { thunkFetchSpotDetails } from "../../../store/spotReducer";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function AddReviewModal({ spot }) {
     const [stars, setStars] = useState('');
@@ -11,14 +12,19 @@ export default function AddReviewModal({ spot }) {
     const [validation, setValidation] = useState({});
     const [submit, setSubmit] = useState(false)
 
+    const { closeModal } = useModal();
     const dispatch = useDispatch();
+    const navigation = useNavigate();
 
     useEffect(() => {
         const error = {};
         if (submit) {
-            if (!review) {
-                error.country = "Review is required";
+            if (review.length < 10 ) {
+                error.review = "Review need 10 chracter long";
             }
+            // if (review) {
+            //     error.review = "YOu already review for this spot";
+            // }
             if (!stars) {
                 error.star = 'star must be from 1 to 5'
             }
@@ -39,6 +45,11 @@ export default function AddReviewModal({ spot }) {
         }
 
         await dispatch(thunkFetchAddReview(spot?.id, newReview))
+        await dispatch(thunkFetchReviews(spot.id))
+        await dispatch(thunkFetchSpotDetails(spot.id))
+        .then(navigation(`spots/${spot.id}`))
+        .then(closeModal)
+
     }
 
     return (
@@ -81,7 +92,7 @@ export default function AddReviewModal({ spot }) {
                     <div>
                         {stars ? (stars === '1' ? `${stars} Star` : `${stars} Stars`) : ''}
                     </div>
-                    <button type="submit">Submit Your Review</button>
+                    <button type="submit" disabled={Object.keys(validation).length > 0}>Submit Your Review</button>
                 </form>
             </div>
 
