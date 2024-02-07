@@ -55,6 +55,9 @@ export default function NewSpot() {
             if (!price) {
                 error.price = "Price is required";
             }
+            if (price && /[a-z]/.test(price)) {
+                error.price = 'Must be number'
+            }
             if (!preview) {
                 error.preview = "Preview is required";
             }

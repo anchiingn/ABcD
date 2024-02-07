@@ -24,10 +24,10 @@ export default function ReviewList({ review, spot }) {
                 <div>{review.review}</div>
                 {sessionUser && sessionUser.id === review.userId && (
                     <>
-                        <OpenModalButton
+                        {/* <OpenModalButton
                             buttonText={'Update'}
                             modalComponent={<UpdateReview spot={spot} />}
-                        />
+                        /> */}
                         <OpenModalButton
                             buttonText={'Delete'}
                             modalComponent={<DeleteReview review={review} spot={spot}/>}
