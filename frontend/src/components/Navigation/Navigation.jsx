@@ -8,8 +8,11 @@ function Navigation({ isLoaded }) {
 
   return (
     <div id='nav'>
-      <div id='logo'>
-        <NavLink id='logo_name' exact to="/"><i id='logo_icon' className="fa-brands fa-airbnb"></i> ABnC</NavLink>
+      <div style={{display:'flex', alignItems:'center', gap:'20px'}}>
+        <div id='logo'>
+          <NavLink id='logo_name' exact to="/"><i id='logo_icon' className="fa-brands fa-airbnb"></i> ABcD</NavLink>
+        </div>
+        <div><i className="fa-brands fa-github"/> <NavLink to={'https://github.com/anchiingn'} style={{textDecoration:'none', color:'black', fontSize:'10px'}}>Anchi Nguyen</NavLink></div>
       </div>
       {isLoaded && (
         <div id='user_button'>
