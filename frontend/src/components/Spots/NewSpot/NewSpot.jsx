@@ -93,25 +93,26 @@ export default function NewSpot() {
             const imageObj = { spotId: spot.id, url: preview, preview: true }
             await dispatch(thunkFetchImg(spot.id, imageObj))
         }
-
+        
         if (image1 !== '') {
-            const image1 = { spotId: spot.id, url: image1, preview: false }
-            await dispatch(thunkFetchImg(spot.id, image1))
+            const img1 = { spotId: spot.id, url: image1 }
+            await dispatch(thunkFetchImg(spot.id, img1))
+            console.log(img1)
         }
-
+        
         if (image2 !== '') {
-            const image2 = { spotId: spot.id, url: image2, preview: false }
-            await dispatch(thunkFetchImg(spot.id, image2))
+            const img2 = { spotId: spot.id, url: image2 }
+            await dispatch(thunkFetchImg(spot.id, img2))
         }
-
+        
         if (image3 !== '') {
-            const image3 = { spotId: spot.id, url: image3, preview: false }
-            await dispatch(thunkFetchImg(spot.id, image3))
+            const img3 = { spotId: spot.id, url: image3 }
+            await dispatch(thunkFetchImg(spot.id, img3))
         }
-
+        
         if (image4 !== '') {
-            const image4 = { spotId: spot.id, url: image4, preview: false }
-            await dispatch(thunkFetchImg(spot.id, image4))
+            const img4 = { spotId: spot.id, url: image4 }
+            await dispatch(thunkFetchImg(spot.id, img4))
         }
 
 

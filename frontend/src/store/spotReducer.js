@@ -81,6 +81,7 @@ export const thunkFetchImg = (spotId, img) => async (dispatch) => {
         headers: { "Content-Type": "application/json", },
         body: JSON.stringify(img)
     })
+    console.log(spotId, img)
     if (res.ok) {
         const image = await res.json();
         dispatch(createSpot(image));

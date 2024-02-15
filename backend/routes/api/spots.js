@@ -437,6 +437,7 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
     return res.json(newSpot);
 });
 
+
 //Add an Image to a Spot based on the Spot's id
 router.post('/:spotId/images', requireAuth, async (req, res) => {
     const { url, preview } = req.body;
@@ -476,7 +477,7 @@ router.put('/:spotId/images/:imageId', requireAuth, async (req, res) => {
             spotId: req.params.spotId
         });
         
-        return res.json(image)
+        return res.json(newSpotImage)
     }
     else if (image && spot && spot.ownerId !== req.user.id) {
         res.status(403);
